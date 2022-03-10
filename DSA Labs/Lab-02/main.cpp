@@ -1,64 +1,59 @@
 #include<iostream>
 
-// #include"Book.h"
+
 #include"any.cpp"
+#include"functions.cpp"
 
 using namespace std;
+
+void driverOne(){
+    UnsortedList ul(7);
+    ul.display();
+    ul.insertVal(4);
+    ul.insertVal(7);
+    ul.insertVal(7);
+    ul.insertVal(3);
+    ul.insertVal(3);
+    ul.insertVal(1);
+    ul.insertVal(1);
+    ul.display();
+    // ul.removeAllOccurencesAndShiftLeft(1);
+    // ul.removeAllOccurencesWithNewArray(1);
+    // ul.removeAllOccurencesAndPlaceLastElementOnThesePlaces(7);
+    // ul.removeAllOccurencesWITHOUTNewArray(4);
+    // ul.removeSingleOccurenceAndPlaceLastElementOnThisPlaces(0);  // give index
+    // ul.removeSingleOccurenceAndShiftLeft(0);   // give index
+    ul.display();
+}
+
+
+
+
+void driverTwo(){
+    SortedList sl(7);
+    sl.display();
+    sl.insertVal(3);
+    sl.insertVal(1);
+    sl.insertVal(2);
+    sl.insertVal(-4);
+    sl.insertVal(5);
+    sl.uniqueInsertVal(6);
+    sl.uniqueInsertVal(-4);
+    // sl.display();
+    // sl.removeAllOccurencesAndShiftLeft(7);
+    // sl.removeAllOccurencesWithNewArray(1);
+    // sl.removeAllOccurencesWITHOUTNewArray(4);
+    // sl.removeSingleOccurenceAndShiftLeft(3);   // give index
+    sl.display();
+    cout<<binarySearch(sl.getArr(), sl.getCurrentSize(), -4)<<endl;
+}
+
+
 
 
 int main(){
 
-    ////////////////////////////////////////////////////////////////
-    // TESTING of SIMPLE BOOK
-    Book b1;
-    b1.setTitle("C++");
-    b1.setAuthor("Robert Lafore");
-    b1.show();
-
-    // TESTING of SIMPLE FICTION
-    Fiction f1;
-    f1.setLevel(1, "C++", "Robert Lafore");
-    f1.show();
-
-    // TESTING of SIMPLE NON-FICTION
-    // NonFiction nf1;
-    // nf1.setPages(438, "C++", "Robert Lafore");
-    // nf1.show();
-
-    // ************ TESTING As per describe in LAB pdf ************  
-    // string title, author;
-    // int level, pages;
-    // Fiction arr1[5];
-    // NonFiction arr2[5];
-    // for(int i=0; i<5; i++){
-        
-    //     cout<<"Enter Book Title for book "<<i+1<<" : ";
-    //     getline(cin, title);
-    //     cout<<"Enter Author Name for book "<<i+1<<" : ";
-    //     getline(cin, author);
-    //     cout<<"Enter Level book "<<i+1<<" : ";
-    //     cin>>level;
-    //     cin.ignore();
-    //     arr1[i].setLevel(level, title, author);
-    // }
-    // for(int i=0; i<5; i++){
-    //     arr1[i].show();
-    // }
-
-    // for(int i=0; i<5; i++){
-    //     cout<<"Enter Book Title for book "<<i+1<<" : ";
-    //     getline(cin, title);
-    //     cout<<"Enter Author Name for book "<<i+1<<" : ";
-    //     getline(cin, author);
-    //     cout<<"Enter Number of Pages in book "<<i+1<<" : ";
-    //     cin>>pages;
-    //     cin.ignore();
-    //     arr2[i].setPages(pages, title, author);
-    // }
-    // for(int i=0; i<5; i++){
-    //     arr2[i].show();
-    // }
-
+    driverOne();
 
 
     return 0;
