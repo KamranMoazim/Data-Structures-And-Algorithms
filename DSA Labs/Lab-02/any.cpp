@@ -230,15 +230,173 @@ UnsortedList::~UnsortedList(){
 
 
 
+// TASK 2
+
+bool UnsortedList::removeMax (int& maxVal){
+    if(isEmpty()){
+        return false;
+    } else {
+
+        maxVal = arr[0];
+        int maxValIndex = 0;
+
+        for(int i=0; i<currentSize; i++){
+            if(maxVal < arr[i]){
+                maxVal = arr[i];
+                maxValIndex = i;
+            }
+        }
+
+        if(searchValCount(maxVal) > 1){
+            // cout<<"run";
+            for(int i=0; i<currentSize; i++){
+                if(maxVal == arr[i]){
+                    maxValIndex = i;
+                    break;
+                }
+            }
+        }
+
+        for(int i=maxValIndex; i<currentSize; i++){
+            arr[i] = arr[i+1];
+        }
+
+        currentSize--;
+
+        return true;
+    }
+}
+
+void UnsortedList::reverse (){
+    if(isEmpty()){
+        cout<<"List is Empty!"<<endl;
+    } else {
+        int temp=0;
+        for(int i=0, j=currentSize-1; i<(currentSize/2); i++,j--){
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+}
+
+void UnsortedList::combineList (const UnsortedList& list2){
+    if(list2.currentSize + currentSize < maxSize){
+        for(int i=0, j=currentSize; i<list2.currentSize; i++, j++){
+            cout<<list2.arr[i]<<"\t";
+            arr[j] = list2.arr[i];
+        }
+    } else {
+        int tempSize = list2.currentSize + currentSize;
+        int* newArr = new int[tempSize];
+
+        for(int i=0; i<currentSize; i++){
+            newArr[i] = arr[i];
+        }
+
+        for(int i=0, j=currentSize; i<list2.currentSize; i++, j++){
+            newArr[j] = list2.arr[i];
+        }
+
+        currentSize = tempSize;
+        // cout<<currentSize<<endl;
+
+        delete[] arr;
+        arr = NULL;
+
+        arr = newArr;
+
+    }
+}
 
 
 
+// TASK 4
+int UnsortedList::replaceVal (int oldVal, int newVal){
+    int count=0;
+    for(int i=0; i<currentSize; i++){
+        if(arr[i]==oldVal){
+            arr[i]=newVal;
+            count++;
+        }
+    }
+    return count;
+}
 
 
+bool UnsortedList::removeMin (int& minVal){
+    if(isEmpty()){
+        return false;
+    } else {
+
+        minVal = arr[0];
+        int minValIndex = 0;
+
+        for(int i=0; i<currentSize; i++){
+            if(minVal > arr[i]){
+                minVal = arr[i];
+                minValIndex = i;
+            }
+        }
+
+        if(searchValCount(minVal) > 1){
+            // cout<<"run";
+            for(int i=0; i<currentSize; i++){
+                if(minVal == arr[i]){
+                    minValIndex = i;
+                    break;
+                }
+            }
+        }
+
+        for(int i=minValIndex; i<currentSize; i++){
+            arr[i] = arr[i+1];
+        }
+
+        currentSize--;
+
+        return true;
+    }
+}
 
 
+bool UnsortedList::removeLastOccurrence (int val){
+    if(isEmpty()){
+        return false;
+    } else {
 
+        int valIndex = 0;
 
+        for(int i=0; i<currentSize; i++){
+            if(arr[i] == val){
+                valIndex = i;
+            }
+        }
+
+        if(valIndex == 0){
+            return false;
+        }
+
+        val = arr[valIndex];
+
+        if(searchValCount(val) > 1){
+            for(int i=currentSize; i>=0; i--){
+                if(val == arr[i]){
+                    valIndex = i;
+                    break;
+                }
+            }
+        }
+
+        for(int i=valIndex; i<currentSize; i++){
+            arr[i] = arr[i+1];
+        }
+
+        currentSize--;
+
+        return true;
+    }
+}
 
 
 
@@ -253,6 +411,7 @@ bool SortedList::isEmpty(){
 bool SortedList::isValidIndex(int i){
     return currentSize >= i ? true : false;
 }
+
 SortedList::SortedList(int s=10){
     maxSize = s;
     if(maxSize<=0){
@@ -351,6 +510,7 @@ bool SortedList::insertVal(int val){
     } else {
 
         int i=currentSize-1;
+        
         while(i>=0 && arr[i]>val){
             arr[i+1]=arr[i];
             i--;
@@ -455,3 +615,67 @@ SortedList::~SortedList(){
         arr = NULL;
     }
 }
+
+
+// TASK 1
+// 2 4  9  11  13  rep 4 with 12
+// 2 12 9  11  13 not like this
+// 2 9  11 12  13 should
+
+
+// 0 2 4  9  11  13  rep 4 with 1
+// 0 2 1  9  11  13 not like this
+// 0 1 2  9  11  13 should
+
+bool SortedList::replace (int index, int newVal){
+    if(isValidIndex(index)){
+        if(arr[index] >= newVal){
+            // means the coming-value is smaller
+            int i=index;
+            while(i>=0 && arr[i]>newVal){
+                arr[i]=arr[i-1];
+                i--;
+            }
+            arr[i+1] = newVal;
+
+        } else {
+            // means the coming-value is greater
+            int i=index;
+            while(i<currentSize && arr[i]<newVal){
+                arr[i]=arr[i+1];
+                i++;
+            }
+            arr[i-1] = newVal;
+        }
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+bool SortedList::binarySearch (int val){
+
+    int start=0, end=currentSize-1, middle=0;
+
+    while(start<=end){
+        
+        middle = (start+end)/2;
+
+        if(val == arr[middle]){
+            return true;
+
+        } else if(val < arr[middle]){
+            end = middle-1;
+
+        } else {
+            start = middle+1;
+        }
+    }
+    return false;
+}
+
+
+
+

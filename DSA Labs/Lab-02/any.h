@@ -38,6 +38,14 @@ public:
     int removeAllOccurencesWithNewArray(int val);
     int removeAllOccurencesWITHOUTNewArray(int val);
     ~UnsortedList();
+    // TASK 2
+    bool removeMax (int& maxVal);
+    void reverse ();
+    void combineList (const UnsortedList& list2);
+    // TASK 4
+    int replaceVal (int oldVal, int newVal);
+    bool removeMin (int& minVal);
+    bool removeLastOccurrence (int val);
 };
 
 
@@ -55,6 +63,7 @@ class SortedList {
     bool isFull();
     bool isEmpty();
     bool isValidIndex(int i);
+    void reSort();
 public:
     SortedList(int s);
     SortedList(const SortedList& comingSortedList);
@@ -74,4 +83,7 @@ public:
     int removeAllOccurencesWithNewArray(int val);
     int removeAllOccurencesWITHOUTNewArray(int val);
     ~SortedList();
+    // TASK 1
+    bool replace (int index, int newVal);
+    bool binarySearch (int val);
 };

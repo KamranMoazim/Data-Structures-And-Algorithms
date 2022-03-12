@@ -6,46 +6,73 @@
 
 using namespace std;
 
-void driverOne(){
+void driverTwo(){
+    int maxInList=0;
     UnsortedList ul(7);
-    ul.display();
+    UnsortedList list2(2);
+    list2.insertVal(1);
+    list2.insertVal(6);
+    // list2.display();
+    ul.insertVal(7);
+    ul.insertVal(3);
+    ul.insertVal(2);
     ul.insertVal(4);
-    ul.insertVal(7);
-    ul.insertVal(7);
-    ul.insertVal(3);
-    ul.insertVal(3);
+    ul.insertVal(5);
     ul.insertVal(1);
-    ul.insertVal(1);
+    ul.insertVal(7);
     ul.display();
-    // ul.removeAllOccurencesAndShiftLeft(1);
-    // ul.removeAllOccurencesWithNewArray(1);
-    // ul.removeAllOccurencesAndPlaceLastElementOnThesePlaces(7);
-    // ul.removeAllOccurencesWITHOUTNewArray(4);
-    // ul.removeSingleOccurenceAndPlaceLastElementOnThisPlaces(0);  // give index
-    // ul.removeSingleOccurenceAndShiftLeft(0);   // give index
+    ul.reverse();
+    ul.display();
+    ul.combineList(list2);
+    ul.display();
+    ul.removeMax(maxInList);
+    cout<<maxInList<<endl;
     ul.display();
 }
 
 
 
 
-void driverTwo(){
+void driverOne(){
+    // cout
     SortedList sl(7);
-    sl.display();
     sl.insertVal(3);
     sl.insertVal(1);
     sl.insertVal(2);
-    sl.insertVal(-4);
+    sl.insertVal(4);
     sl.insertVal(5);
-    sl.uniqueInsertVal(6);
-    sl.uniqueInsertVal(-4);
-    // sl.display();
-    // sl.removeAllOccurencesAndShiftLeft(7);
-    // sl.removeAllOccurencesWithNewArray(1);
-    // sl.removeAllOccurencesWITHOUTNewArray(4);
-    // sl.removeSingleOccurenceAndShiftLeft(3);   // give index
     sl.display();
-    cout<<binarySearch(sl.getArr(), sl.getCurrentSize(), -4)<<endl;
+    sl.replace(3, -1);
+    sl.display();
+    sl.replace(1, 10);
+    sl.display();
+    sl.replace(5, 100);
+    sl.display();
+    cout<<sl.binarySearch(0)<<endl;
+    cout<<sl.binarySearch(100)<<endl;
+    cout<<sl.binarySearch(5)<<endl;
+}
+
+
+
+void driverThree(){
+    int minInList=0;
+    UnsortedList ul(7);
+    ul.insertVal(7);
+    ul.insertVal(3);
+    ul.insertVal(2);
+    ul.insertVal(4);
+    ul.insertVal(5);
+    ul.insertVal(1);
+    ul.insertVal(7);
+    ul.display();
+    ul.removeAllOccurencesWITHOUTNewArray(1);
+    ul.display();
+    ul.removeMin(minInList);
+    cout<<minInList<<endl;
+    ul.display();
+    ul.removeLastOccurrence(7);
+    ul.display();
 }
 
 
@@ -53,7 +80,9 @@ void driverTwo(){
 
 int main(){
 
-    driverOne();
+    // driverOne();
+    // driverTwo();
+    driverThree();
 
 
     return 0;
