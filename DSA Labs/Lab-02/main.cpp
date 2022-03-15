@@ -76,14 +76,78 @@ void driverThree(){
 }
 
 
+void driverFour(){
+    int n=15;
+    int c=0;
+    int j=0;
+    int i=1;
+    for(i=1; i<=n; i++){
+        cout<<"OUTER-LOOP --> for i="<<i<<"\t";
+        cout<<"INNER-LOOP --> for j=";
+        for(j=1; j<=n; j=j+i){
+            cout<<" "<<j;
+            c++;
+        }
+        cout<<"\tINNER-LOOP-RAN --> c="<<c;
+        c=0;
+        cout<<endl;
+    }
+    cout<<"OUTER-LOOP --> for i="<<i<<"\n";
+}
+
+
+void driverFive(){
+    int n=7;
+    int c=0;
+    int j=0;
+    int i=1;
+    for(i=1; i<=n; i=i*2){
+        cout<<"OUTER-LOOP --> for i="<<i<<"\t";
+        cout<<"INNER-LOOP --> for j=";
+        for(j=0; j<i; j++){
+            cout<<" "<<j;
+            c++;
+        }
+        cout<<" "<<j;
+        cout<<"\tINNER-LOOP-RAN --> c="<<c;
+        c=0;
+        cout<<endl;
+    }
+    cout<<"OUTER-LOOP --> for i="<<i<<"\n";
+}
+
+
+void driverSix(){
+    int n=50;
+    int c=0;
+    int j=0;
+    int i=1;
+    for(i=1; i<n; i++){
+        cout<<"OUTER-LOOP --> for i="<<i<<"\t";
+        cout<<"INNER-LOOP --> for j=";
+        for(j=1; j<=i; j=j*2){
+            cout<<" "<<j;
+            c++;
+        }
+        cout<<" "<<j;
+        cout<<"\tINNER-LOOP-RAN --> c="<<c;
+        c=0;
+        cout<<endl;
+    }
+    cout<<"OUTER-LOOP --> for i="<<i<<"\n";
+}
+
 
 
 int main(){
 
     // driverOne();
     // driverTwo();
-    driverThree();
+    // driverThree();
 
+    // driverFour();
+    // driverFive();
+    driverSix();
 
     return 0;
 }
