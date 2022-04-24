@@ -23,40 +23,36 @@ void printArray(int arr[], int n){
 
 void selectionSort(int* arr, int size){
 
-    int i=0, j=0;
+    int minValIndex=0;
+    for(int i=0; i<size; i++){
 
-    while(i < size){
+        minValIndex = i;
 
-        j=i+1;
+        for(int j=i+1; j<size; j++){
 
-        while(j<=size-1){
-            
-            if(arr[i] > arr[j]){
-                swapper(arr[i], arr[j]);
+            if(arr[j] < arr[minValIndex]){
+                minValIndex = j;
             }
 
-            j++;
         }
 
-        i++;
+        swapper(arr[i], arr[minValIndex]);
     }
 }
 
 void insertionSort(int* arr, int size){
 
-    int i=1, j=0;
+    int key;
+    for(int i=0; i<size; i++){
+        key = arr[i];
+        int j = i-1;
 
-    while(i < size){
-
-        j=i;
-
-        while(j>=1 && arr[j] < arr[j-1]){
-            swapper(arr[j-1], arr[j]);
-
+        while(j>=0 && key < arr[j]){
+            arr[j+1] = arr[j];
             j--;
         }
-
-        i++;
+        arr[j+1] = key;
+        printArray(arr, size);
     }
 }
 
@@ -122,6 +118,7 @@ int findKthLargest(const int* arr, int n, int k){
                 count++;
             }
         }
+
         if(count == (n-k)){
             KthElement = arr[i];
             break;
@@ -166,7 +163,7 @@ void insertionSortTest(){
 
     insertionSort(arr, 5);
 
-    printArray(arr, 5);
+    // printArray(arr, 5);
 }
 
 void selectionSortTest(){

@@ -239,16 +239,19 @@ bool UnsortedList::removeMax (int& maxVal){
 
         maxVal = arr[0];
         int maxValIndex = 0;
+        int count = 0;
 
         for(int i=0; i<currentSize; i++){
+            if(maxVal==arr[i])
+                count++;
             if(maxVal < arr[i]){
                 maxVal = arr[i];
                 maxValIndex = i;
             }
         }
 
-        if(searchValCount(maxVal) > 1){
-            // cout<<"run";
+        // if(searchValCount(maxVal) > 1){
+        if(count > 1){
             for(int i=0; i<currentSize; i++){
                 if(maxVal == arr[i]){
                     maxValIndex = i;
@@ -299,7 +302,6 @@ void UnsortedList::combineList (const UnsortedList& list2){
         }
 
         currentSize = tempSize;
-        // cout<<currentSize<<endl;
 
         delete[] arr;
         arr = NULL;
@@ -630,7 +632,7 @@ SortedList::~SortedList(){
 bool SortedList::replace (int index, int newVal){
     if(isValidIndex(index)){
         if(arr[index] >= newVal){
-            // means the coming-value is smaller
+            // means the coming-value is smaller than previously stored value
             int i=index;
             while(i>=0 && arr[i]>newVal){
                 arr[i]=arr[i-1];
@@ -639,7 +641,7 @@ bool SortedList::replace (int index, int newVal){
             arr[i+1] = newVal;
 
         } else {
-            // means the coming-value is greater
+            // means the coming-value is greater than previously stored value
             int i=index;
             while(i<currentSize && arr[i]<newVal){
                 arr[i]=arr[i+1];
@@ -658,13 +660,14 @@ bool SortedList::replace (int index, int newVal){
 bool SortedList::binarySearch (int val){
 
     int start=0, end=currentSize-1, middle=0;
+    bool found = false;
 
-    while(start<=end){
+    while(start<=end && !found){
         
         middle = (start+end)/2;
 
         if(val == arr[middle]){
-            return true;
+            found = true;
 
         } else if(val < arr[middle]){
             end = middle-1;
@@ -673,7 +676,7 @@ bool SortedList::binarySearch (int val){
             start = middle+1;
         }
     }
-    return false;
+    return found;
 }
 
 

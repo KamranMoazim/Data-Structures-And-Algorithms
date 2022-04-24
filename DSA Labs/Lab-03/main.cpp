@@ -117,6 +117,9 @@ int main(){
     driverTwo();
     // driverThree();
 
+    // selectionSortTest();
+    // insertionSortTest();
+
 
     return 0;
 }

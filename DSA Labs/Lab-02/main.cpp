@@ -60,8 +60,9 @@ void driverThree(){
     UnsortedList ul(7);
     ul.insertVal(7);
     ul.insertVal(3);
-    ul.insertVal(2);
+    // ul.insertVal(2);
     ul.insertVal(4);
+    ul.insertVal(1);
     ul.insertVal(5);
     ul.insertVal(1);
     ul.insertVal(7);
@@ -141,13 +142,13 @@ void driverSix(){
 
 int main(){
 
-    // driverOne();
+    driverOne();
     // driverTwo();
     // driverThree();
 
     // driverFour();
     // driverFive();
-    driverSix();
+    // driverSix();
 
     return 0;
 }
