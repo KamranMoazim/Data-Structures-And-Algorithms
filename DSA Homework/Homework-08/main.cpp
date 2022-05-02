@@ -1,7 +1,6 @@
 #include<iostream>
 #include<cmath>
 
-// #include"Book.h"
 #include"any.cpp"
 
 using namespace std;
@@ -187,7 +186,7 @@ int operatorWorker(string oper, string a, string b){
 
     return result;
 }
-void expressionEvaluation(string exp="(60/(30-10+10))"){
+void paranthsizedExpressionEvaluation(string exp="(60/(30-10+10))"){
 
     Stack<string> stackForExpresssion(exp.length());
     string tempA, tempB, oper, tmp_string;
@@ -242,12 +241,6 @@ void expressionEvaluation(string exp="(60/(30-10+10))"){
 }
 
 int main(){
-
-    // string a = "45";
-    // cout<<stoi(a) + stoi(a)<<endl;
-    // int num = 45;
-    // cout<<to_string(num) + to_string(num)<<endl;
-
 
     return 0;
 }
