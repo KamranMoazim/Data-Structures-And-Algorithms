@@ -1,32 +1,12 @@
 #include<iostream>
 #include<cmath>
+#include <typeinfo>
 
 #include"any.cpp"
 
 using namespace std;
 
 
-void driver1(){
-
-    Stack<int> myStack(5);
-
-    int val = 0;
-
-    myStack.push(5);
-    myStack.push(3);
-    myStack.push(1);
-    myStack.push(0);
-
-    myStack.pop(val);
-    cout<<val<<endl;
-    myStack.pop(val);
-    cout<<val<<endl;
-    myStack.pop(val);
-    cout<<val<<endl;
-    myStack.pop(val);
-    cout<<val<<endl;
-    myStack.pop(val);
-}
 
 // *********** 1
 void decimalToOtherConversion(){
@@ -240,7 +220,116 @@ void paranthsizedExpressionEvaluation(string exp="(60/(30-10+10))"){
     cout<<"Result is : "<<tmp_string<<endl;
 }
 
+// *********** 5
+int operatorsPrecedence(string oper){
+
+    if(oper == "!"){ // || oper == "-" 
+        return 1;
+    } else if(oper == "*" || oper == "/" || oper == "%"){
+        return 2;
+    } else if(oper == "+" || oper == "-"){
+        return 3;
+    } else if(oper == "<" || oper == "<=" || oper == ">" || oper == ">="){
+        return 4;
+    } else if(oper == "==" || oper == "!="){
+        return 5;
+    } else if(oper == "&&"){
+        return 6;
+    } else { // if(oper == "||"){
+        return 7;
+    }
+
+}
+
+
+string infixToPostfixConvertor(string infix="(10+12*300)+2") {   //    10/11-12+13*14-10*15
+
+    Stack<string> stackForOperator(infix.length());
+    string stackTopOper, pushingOper;
+    int num=0;
+
+    for(int i=0; i<infix.length(); i++){
+
+        if(isdigit(infix[i])){
+            int j=0;
+            num=(int)(infix[i]) - 48;
+            i++;
+            while(isdigit(infix[i])){
+                num *= 10;
+                num += (int)(infix[i]) - 48;
+                i++;
+            }
+            i--;
+
+            cout<<num<<"\t";
+            num = 0;
+            continue;
+        }
+
+        if(infix[i] == '('){
+            pushingOper = "";
+            pushingOper.push_back(infix[i]);
+            stackForOperator.push(pushingOper);
+        } else if(infix[i] == ')'){
+            while(stackForOperator.pop(stackTopOper)){
+                if(stackTopOper == "("){
+                    
+                } else {
+                    cout<<stackTopOper<<"\t";
+                }
+            }
+        } else {
+
+            pushingOper = "";
+            pushingOper.push_back(infix[i]);
+
+            if(!stackForOperator.getTop(stackTopOper)){
+                stackForOperator.push(pushingOper);
+            } else {
+                while((stackForOperator.getTop(stackTopOper))){
+
+                    if(stackTopOper == "("){
+                        break;
+                    }
+
+                    // 3 < 2
+                    if(!(operatorsPrecedence(stackTopOper) < operatorsPrecedence(pushingOper))){
+                        stackForOperator.push(pushingOper);
+                        break;
+                    } else {
+                        stackForOperator.pop(stackTopOper);
+                        cout<<stackTopOper<<"\t";
+                    }
+                }
+            }
+
+        }        
+
+        // stackForOperator.print();
+    }
+    // stackForOperator.print();
+
+
+    while(stackForOperator.pop(stackTopOper)){
+        cout<<stackTopOper<<"\t";
+    }
+
+    cout<<endl;
+
+    return "";
+}
+
 int main(){
+
+    // paranthsizedExpressionEvaluation("(1000+12)");
+    infixToPostfixConvertor();
+
+    // string k = "fsdjf";
+    // for(int i=0; i<k.length(); i++){
+    //     // cout<<k[i]<<"\t";
+    //     cout << typeid(k[i]).name() << '\n';
+    // }
+    // cout<<endl;
 
     return 0;
 }

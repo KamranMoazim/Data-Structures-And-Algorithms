@@ -185,9 +185,9 @@ void driverProgram2(){
     getline(cin, fileName);
     fs.open(fileName, ios::out);
 
-    int totalPackets = line.length()/5;
-    totalPackets += line.length()%5==0?0:1;
-    fs<<totalPackets<<" "<<endl;
+    int totalPackets = line.length()/PACKET_SIZE;
+    totalPackets += line.length()%PACKET_SIZE==0?0:1;
+    // fs<<totalPackets<<" "<<endl;
 
     totalPackets = 1;
     for(int i=0; i<line.length(); i+=PACKET_SIZE){

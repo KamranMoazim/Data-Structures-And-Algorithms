@@ -857,7 +857,6 @@ bool SortedList::isSubset(const SortedList& list2) const {
     int count = 0;
     bool isSubsetTrue = false;
 
-
     if(thisSize <= list2Size){
 
         int i=0, j=0;
