@@ -96,6 +96,7 @@ void driverProgram1(){
 
 
 
+
 // *********************************** TASK 2
 int findLargestIndex(int* arr, int start, int end) {
 
@@ -115,15 +116,17 @@ int findLargestIndex(int* arr, int start, int end) {
 
 void driverProgram2(){
 
-    // int arr[6] = {7,1,9,3,15,2};  // returns  4 
+    // int arr[6] = {70,1,90,3,15,20};  // returns  4 
     // int arr[6] = {7,1,9,3,5,2};  // returns  2
     int arr[10] = {7,1,9,3,5,2,0,4,8,100};  // returns  9
 
-    // cout<<"Largest Value is at index : "<<findLargestIndex(arr, 0, 6);
-    cout<<"Largest Value is at index : "<<findLargestIndex(arr, 0, 10);
+    cout<<"Largest Value is at index : "<<findLargestIndex(arr, 4, 7);
 
     cout<<endl;
 }
+
+
+
 
 
 // *********************************** TASK 3.1
@@ -176,6 +179,149 @@ void driverProgram3(){
 }
 
 
+
+
+
+// *********************************** TASK 4
+int power(int a, int b) {
+    if(b == 1){
+        return a;
+    }
+
+    return a * power(a, --b);
+}
+
+
+
+
+// *********************************** TASK 5
+int product (int a, int b)  {
+    if(b == 1){
+        return a;
+    }
+
+    return a + product(a, --b);
+}
+
+
+
+
+
+// *********************************** TASK 6
+// *********** 6.1
+void printChar(char ch, int n){
+    cout<<ch;
+    n--;
+    if(n <= 0){
+        cout<<endl;
+        return;
+    }
+    printChar(ch, n);
+}
+// *********** 6.2
+void printPattern1(char ch, int n){
+    printChar(ch, n);
+    n--;
+    if(n <= 0){
+        cout<<endl;
+        return;
+    }
+    printPattern1(ch, n);
+}
+// *********** 6.3
+void printPattern2 (char ch, int n){
+
+    if(n <= 0){
+        return;
+    }
+    
+    int k=n-1;
+    printPattern2(ch, k);
+    printChar(ch, n);
+}
+
+
+
+
+
+
+// *********************************** TASK 7
+int quotient (int num, int den) {
+
+    if(num < den){
+        return 0;
+    }
+
+    return 1 + quotient(num-den, den);
+
+}
+
+
+
+
+
+// *********************************** TASK 8
+int findLargestValue(int* arr, int start, int end) {
+
+    int val=arr[end];
+
+    if(start < end){
+        int gettingVal = findLargestValue(arr, start+1, end);
+        if(arr[start] > gettingVal){
+            val = arr[start];
+        } else {
+            val = gettingVal;
+        }
+    }
+            
+    return val;
+}
+
+
+
+
+// *********************************** TASK 9
+bool areArraysEqual (int* a, int aSize, int* b, int bSize) {
+
+    if(aSize == bSize){
+
+        if(aSize == 0){
+            return a[aSize] == b[bSize] ? true : false;
+        }
+
+
+        if(a[aSize-1] == b[bSize-1]){
+            bool cond = areArraysEqual(a, --aSize, b, --bSize);
+            return true && cond;
+        } else {
+            return false;
+        }
+
+    } else {
+        return false;
+    }
+
+}
+
+
+
+
+// *********************************** TASK 10
+int countVowels (char* str, int length) {
+
+    if(length > 0){
+        if(str[length-1] == 'a' || str[length-1] == 'e' || str[length-1] == 'i' || str[length-1] == 'o' || str[length-1] == 'u'){
+            return 1 + countVowels(str, --length);
+        } else {
+            return 0 + countVowels(str, --length);
+        }
+    }
+
+    return 0;
+}
+
+
+
 int main(){
 
     // driverProgram1();
@@ -184,6 +330,28 @@ int main(){
 
     // driverProgram3();
 
+
+
+
+    // cout<<power(2,3);
+    // cout<<power(4,2);
+
+    // cout<<product(2,3);
+    // cout<<product(4,2);
+
+    // cout<<quotient(7,2);
+    // cout<<quotient(70,7);
+    // cout<<quotient(69,7);
+
+    // int arr1[6] = {70,1,90,3,15,20};
+    // int arr2[6] = {70,1,90,3,15,20};
+    // cout<<areArraysEqual(arr1, 6, arr2, 6);
+
+    // char name[] = "Kamran";
+    // char name[] = "Faizan";
+    // cout<<countVowels(name, 6);
+
+    cout<<endl;
 
     return 0;
 }

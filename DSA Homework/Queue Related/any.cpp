@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// ************ QUEUE
 
 template <typename T>
 bool Queue<T>::isEmpty(){
@@ -81,5 +82,139 @@ void Queue<T>::print(){
             j = ((j+1)%(maxSize));
         }
         cout<<endl;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ************ DEQUE
+
+
+template <typename T>
+Deque<T>::Deque (int n) {
+
+    maxSize = n > 0 ? n : 10;
+    que = new T[maxSize];
+    front = 0;
+    back = 0;
+    currSize = 0;
+}
+
+template <typename T>
+Deque<T>::~Deque () {
+    
+    if(que != NULL){
+        delete[] que;
+        que = NULL;
+    }
+}
+
+template <typename T>
+bool Deque<T>::isEmpty () {
+    return currSize == 0 ? true : false;
+}
+
+template <typename T>
+bool Deque<T>::isFull () {
+    return maxSize == currSize ? true : false;
+}
+
+template <typename T>
+void Deque<T>::display () {
+    
+    if(isEmpty()){
+        cout<<"Deque is empty!"<<endl;
+    } else {
+        cout<<"Contents of Deque are : ";
+        int j=front;
+        for(int i=0; i<currSize; i++){
+            cout<<que[j]<<"\t";
+            j = ((j+1)%(maxSize));
+        }
+        cout<<endl;
+    }
+}
+
+template <typename T>
+void Deque<T>::makeEmpty () {
+    
+    front = 0;
+    back = 0;
+    currSize = 0;
+}
+
+
+template <typename T>
+bool Deque<T>::insertAtFront (T val) {
+    
+    if(isFull()){
+        // cout<<"Deque is full!"<<endl;
+        return false;
+    } else {
+        currSize++;
+        front = front-1 < 0 ? (maxSize-1) : (front-1);
+        que[front] = val;
+        return true;
+    }
+}
+
+template <typename T>
+bool Deque<T>::insertAtBack (T val) {
+    
+    if(isFull()){
+        // cout<<"Deque is full!"<<endl;
+        return false;
+    } else {
+        currSize++;
+        que[back] = val;
+        back = ((back+1)%(maxSize));
+        return true;
+    }
+}
+
+template <typename T>
+bool Deque<T>::removeFromFront (T& val) {
+    
+    if(isEmpty()){
+        // cout<<"Deque is empty!"<<endl;
+        return false;
+    } else {
+        currSize--;
+        val = que[front];
+        front = ((front+1)%(maxSize));
+        return true;
+    }
+}
+
+template <typename T>
+bool Deque<T>::removeFromBack (T& val) {
+    
+    if(isEmpty()){
+        // cout<<"Deque is empty!"<<endl;
+        return false;
+    } else {
+        currSize--;
+        back = back-1 < 0 ? (maxSize-1) : (back-1) ;
+        val = que[back];
+        return true;
     }
 }

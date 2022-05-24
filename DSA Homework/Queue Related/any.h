@@ -23,3 +23,25 @@ public:
     void print();
 };
 
+
+
+template <typename T>
+class Deque {
+private:
+    T* que;
+    int maxSize;
+    int currSize;
+    int front;
+    int back;
+public:
+    Deque (int n);
+    ~Deque ();
+    bool isEmpty ();
+    bool isFull ();
+    void display (); 
+    void makeEmpty ();
+    bool insertAtFront (T val);
+    bool insertAtBack (T val);
+    bool removeFromFront (T& val);
+    bool removeFromBack (T& val);
+};

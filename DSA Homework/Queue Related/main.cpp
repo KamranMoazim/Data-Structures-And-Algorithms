@@ -36,6 +36,85 @@ void driver1(){
 }
 
 // *********** 1
+void displayMenu(){
+    cout<<"1. Insert value at Front"<<endl;
+    cout<<"2. Insert value at Back"<<endl;
+    cout<<"3. Remove value from Front"<<endl;
+    cout<<"4. Remove value from Back"<<endl;
+    cout<<"5. Display the Deque"<<endl;
+    cout<<"6. Make the Deque Empty"<<endl;
+    cout<<"7. Exit"<<endl;
+}
+void takeInput(int& var){
+    cout<<"Enter Number to Insert ";
+    cin>>var;
+}
+// *********************************** TASK 1
+void driverProgram1(){
+
+    int dequeSize=0, choice=0, i=0, val=0;
+
+    cout<<"Enter the size of Deque: ";
+    cin>>dequeSize;
+
+    if(dequeSize <= 0){
+        cout<<"Invalid Queue Size!"<<endl;
+        cout<<"Making Queue of size 10."<<endl;
+    }
+
+    Deque<int> dq(dequeSize);
+
+    displayMenu();
+    cout<<"Enter Choice : ";
+    cin>>choice;
+
+    while(choice!=7){
+
+        switch(choice){
+            case 1:
+                takeInput(val);
+                if(!dq.insertAtFront(val)){
+                    cout<<"Value could not be inserted, Queue is Full!"<<endl;
+                }
+                val=0;
+                break;
+            case 2:
+                takeInput(val);
+                if(!dq.insertAtBack(val)){
+                    cout<<"Value could not be inserted, Queue is Full!"<<endl;
+                }
+                val=0;
+                break;
+            case 3:
+                if(dq.removeFromFront(val)){
+                    cout<<"Removed value is "<<val<<endl;
+                } else {
+                    cout<<"Queue is Empty!"<<endl;
+                }
+                val=0;
+                break;
+            case 4:
+                if(dq.removeFromBack(val)){
+                    cout<<"Removed value is "<<val<<endl;
+                } else {
+                    cout<<"Queue is Empty!"<<endl;
+                }
+                val=0;
+                break;
+            case 5:
+                dq.display();
+                break;
+            case 6:
+                dq.makeEmpty();
+            default:
+                cout<<"Please Select Valid Choice!"<<endl;
+        }
+
+        displayMenu();
+        cout<<"Enter Choice : ";
+        cin>>choice;
+    }
+}
 
 
 int main(){
@@ -58,7 +137,7 @@ int main(){
     //     rear = ((rear+1)%(total));
     // }
 
-    driver1();
+    // driverProgram1();
 
 
     return 0;

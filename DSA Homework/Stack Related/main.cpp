@@ -146,7 +146,6 @@ void addingLargeNumbers(){
 
 }
 
-
 // *********** 4
 int operatorWorker(string oper, string a, string b){
 
@@ -240,8 +239,6 @@ int operatorsPrecedence(string oper){
     }
 
 }
-
-
 string infixToPostfixConvertor(string infix="(10+12*300)+2") {   //    10/11-12+13*14-10*15
 
     Stack<string> stackForOperator(infix.length());
@@ -319,17 +316,43 @@ string infixToPostfixConvertor(string infix="(10+12*300)+2") {   //    10/11-12+
     return "";
 }
 
+// *********** 6
+bool isPalimdrome(string str){
+
+    Stack<char> stackForChars1(str.length()/2);
+    Stack<char> stackForChars2(str.length()/2);
+
+    char temp1 = ' ';
+    char temp2 = ' ';
+
+    for(int i=0; i<str.length()/2; i++){
+        stackForChars1.push(str[i]);
+    }
+
+    for(int i=str.length()-1; i>=(str.length()/2); i--){
+        stackForChars2.push(str[i]);
+    }
+
+    while(stackForChars1.pop(temp1) && stackForChars2.pop(temp2)){
+        if(temp1 != temp2){
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 int main(){
 
-    // paranthsizedExpressionEvaluation("(1000+12)");
-    infixToPostfixConvertor();
-
-    // string k = "fsdjf";
-    // for(int i=0; i<k.length(); i++){
-    //     // cout<<k[i]<<"\t";
-    //     cout << typeid(k[i]).name() << '\n';
-    // }
-    // cout<<endl;
+    string str = "HAHAHH";
+    cout<<"Given String : '"<<str<<"' is Palimdrome : ";
+    if(isPalimdrome(str)){
+        cout<<"Yes";
+    } else {
+        cout<<"No";
+    }
+    cout<<endl;
 
     return 0;
 }
