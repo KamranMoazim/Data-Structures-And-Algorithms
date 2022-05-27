@@ -129,6 +129,39 @@ void mergeSort(T* arr, int start, int end){
 }
 
 
+
+// 4 5 3 2 1
+// *************** 5
+template<typename T>
+int findPivot(T* arr, int start, int end){
+
+    T pivot=arr[end];
+
+    int i = start-1;
+
+    for(int j=start; j<end; j++){
+        if(arr[j] < pivot){
+            i++;
+            swapper(arr[j], arr[i]);
+        }
+    }
+
+    swapper(arr[i+1], arr[end]);
+
+    return i+1;
+}
+template<typename T>
+void quickSort(T* arr, int start, int end){
+
+    if(start<end){
+        int pivot = findPivot(arr, start, end);
+        quickSort(arr, start, pivot-1);
+        quickSort(arr, pivot+1, end);
+    }
+
+}
+
+
 // SEARCHING ALGOS
 
 // *************** 1
@@ -163,7 +196,7 @@ bool linearSearch(const T* arr, int size, int key){
 }
 
 
-// *************** MISCELLENEOUS
+// *************** MISCELLENOUS
 template<typename T>
 T findKthLargest(const T* arr, int n, int k){
 

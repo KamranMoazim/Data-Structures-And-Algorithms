@@ -310,7 +310,7 @@ bool areArraysEqual (int* a, int aSize, int* b, int bSize) {
 int countVowels (char* str, int length) {
 
     if(length > 0){
-        if(str[length-1] == 'a' || str[length-1] == 'e' || str[length-1] == 'i' || str[length-1] == 'o' || str[length-1] == 'u'){
+        if((str[length-1] == 'a' || str[length-1] == 'e' || str[length-1] == 'i' || str[length-1] == 'o' || str[length-1] == 'u' || str[length-1] == 'A' || str[length-1] == 'E' || str[length-1] == 'I' || str[length-1] == 'O' || str[length-1] == 'U')){
             return 1 + countVowels(str, --length);
         } else {
             return 0 + countVowels(str, --length);
@@ -348,8 +348,8 @@ int main(){
     // cout<<areArraysEqual(arr1, 6, arr2, 6);
 
     // char name[] = "Kamran";
-    // char name[] = "Faizan";
-    // cout<<countVowels(name, 6);
+    char name[] = "Fiazan";
+    cout<<countVowels(name, 6);
 
     cout<<endl;
 

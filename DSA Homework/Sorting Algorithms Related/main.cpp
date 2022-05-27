@@ -80,12 +80,32 @@ void mergeSortTest(){
 }
 
 
+void quickSortTest(){
+
+    int* arr = new int[5];
+    int j;
+
+    for(int i=0; i<5; i++){
+        cout<<"Num "<<i+1<<" : ";
+        cin>>j;
+        arr[i]=j;
+    }
+
+    printArray(arr, 5);
+
+    quickSort(arr, 0, 4);
+
+    printArray(arr, 5);
+}
+
+
 int main(){
 
     // selectionSortTest();  
     // insertionSortTest();
     // bubbleSortTest();  
     // mergeSortTest();
+    quickSortTest();
 
     return 0;
 }
