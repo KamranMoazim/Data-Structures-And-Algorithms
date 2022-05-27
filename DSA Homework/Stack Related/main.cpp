@@ -343,16 +343,32 @@ bool isPalimdrome(string str){
 }
 
 
+
 int main(){
 
-    string str = "HAHAHH";
-    cout<<"Given String : '"<<str<<"' is Palimdrome : ";
-    if(isPalimdrome(str)){
-        cout<<"Yes";
-    } else {
-        cout<<"No";
+    LinkedListStack<int> linkedStk;
+    int i=0, val=0;
+    while(i<5){
+        cout<<"Enter Value to push to stack : ";
+        cin>>val;
+        linkedStk.push(val);
+        cout<<"pushing "<<val<<endl;
+        i++;
     }
-    cout<<endl;
+    linkedStk.print();
+
+    linkedStk.pop(val);
+    cout<<"poping "<<val<<endl;
+    linkedStk.pop(val);
+    cout<<"poping "<<val<<endl;
+    linkedStk.pop(val);
+    cout<<"poping "<<val<<endl;
+
+    linkedStk.print();
+
+    linkedStk.getTop(val);
+    cout<<"now stack top is "<<val<<endl;
+
 
     return 0;
 }

@@ -21,3 +21,31 @@ public:
     void print();
 };
 
+
+template <typename T>
+class LinkedListStack;
+
+template <typename T>
+class Node {
+private:
+    T data;
+    Node* next;
+public:
+    friend LinkedListStack<T>;
+};
+
+
+template <typename T>
+class LinkedListStack {
+private:
+    Node<T>* top;
+    bool isEmpty();
+public:
+    LinkedListStack();
+    ~LinkedListStack();
+    bool push(T);
+    bool pop(T&);
+    bool getTop(T&);
+    void print();
+};
+

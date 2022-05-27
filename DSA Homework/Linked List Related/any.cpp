@@ -103,7 +103,7 @@ bool LinkedList<T>::search(T key){
         if(curr->data == key){
             return true;
         }
-        curr = curr->next;    
+        curr = curr->next;
     }
 
     return false;
@@ -114,6 +114,10 @@ bool LinkedList<T>::search(T key){
 // HomeWork 3
 template <typename T>
 T LinkedList<T>::findMax(){
+
+    // * make sure if there is no node?????
+    // ! make sure if there is no node?????
+    // ? make sure if there is no node?????
 
     T max = head->data;
 
@@ -130,14 +134,13 @@ T LinkedList<T>::findMax(){
 }
 
 
-// HomeWork 5
+// HomeWork 5 
+template <typename T>
 LinkedList<T>::~LinkedList(){
-    if(head != NULL){
-        Node<T>* curr = head;
-        while(curr != NULL){
-            delete head;
-            head = curr->next;
-            curr = curr->next;
-        }
+    Node<T>* curr;
+    while(head != NULL){
+        curr = head->next;
+        delete head;
+        head = curr;
     }
 }
