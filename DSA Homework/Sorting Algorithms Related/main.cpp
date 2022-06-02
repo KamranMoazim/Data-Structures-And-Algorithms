@@ -91,11 +91,11 @@ void quickSortTest(){
         arr[i]=j;
     }
 
-    printArray(arr, 5);
+    // printArray(arr, 5);
 
     quickSort(arr, 0, 4);
 
-    printArray(arr, 5);
+    // printArray(arr, 5);
 }
 
 

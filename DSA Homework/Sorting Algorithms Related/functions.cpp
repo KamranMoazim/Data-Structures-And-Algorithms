@@ -136,27 +136,89 @@ template<typename T>
 int findPivot(T* arr, int start, int end){
 
     T pivot=arr[end];
-
     int i = start-1;
-
     for(int j=start; j<end; j++){
         if(arr[j] < pivot){
+        printArray(arr, end+1);
             i++;
             swapper(arr[j], arr[i]);
         }
     }
-
+    printArray(arr, end+1);
     swapper(arr[i+1], arr[end]);
-
     return i+1;
 }
 template<typename T>
 void quickSort(T* arr, int start, int end){
 
+    cout<<"after getting into quickSort : \t";
+    printArray(arr, end+1);
+
     if(start<end){
+        cout<<"before sending to pivot : \t";
+        printArray(arr, end+1);
         int pivot = findPivot(arr, start, end);
+        cout<<"pivot is : \t"<<arr[pivot]<<endl;
+        cout<<"after getting from pivot : \t";
+        printArray(arr, end+1);
         quickSort(arr, start, pivot-1);
         quickSort(arr, pivot+1, end);
+    }
+
+}
+
+// *************** 6
+template<typename T>
+int findLargestIndex(T* arr, int start, int end) {
+
+    int index=end;
+
+    if(start < end){
+        int gettingIndex = findLargestIndex(arr, start+1, end);
+        if(arr[start] > arr[gettingIndex]){
+            index = start;
+        } else {
+            index = gettingIndex;
+        }
+    }
+            
+    return index;
+}
+template<typename T>
+void reverseSubArray(T* arr, int start, int end){
+
+    if(start < end){
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+        reverseSubArray(arr, start, end);
+    }
+
+}
+template<typename T>
+void pancakeSortIter(T* arr, int start, int end){
+
+    int tempEnd = end;
+
+    for(int i=start;i<end ;i++){
+        int largestIndex = findLargestIndex(arr, start, tempEnd);
+        reverseSubArray(arr, 0, largestIndex);
+        reverseSubArray(arr, 0, tempEnd);
+        tempEnd--;
+    }
+
+}
+template<typename T>
+void pancakeSortRec(T* arr, int start, int end){
+
+    if(start <= end){
+        int largestIndex = findLargestIndex(arr, start, end);
+        reverseSubArray(arr, 0, largestIndex);
+        reverseSubArray(arr, 0, end);
+        end--;
+        pancakeSortRec(arr, start, end);
     }
 
 }
