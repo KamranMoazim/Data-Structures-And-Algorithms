@@ -19,30 +19,46 @@ void menuDisplay(){
     cout<<"7. to DISPLAY"<<endl;
     cout<<"8. Testing of Copy Constructor"<<endl;
     cout<<"9. Testing of Assignment Operator"<<endl;
-    cout<<"10. to EXIT"<<endl;
+    cout<<"10. to split List in 2 lists"<<endl;
+    cout<<"11. to remove duplicate NODES"<<endl;
+    cout<<"12. to Union two lists (first call 10 to split and then call it)"<<endl;
+    cout<<"13. to delete ALTERNATE NODES"<<endl;
+    cout<<"14. to EXIT"<<endl;
 }
+
+const int toEXIT = 14;
+
 void driverProgram(){
 
     SinglyLinkedList<int> l1;
     SinglyLinkedList<int> l2;
+    SinglyLinkedList<int> l3;
 
     int val=0, choice=1;
 
     menuDisplay();
     cin>>choice;
 
-    while(choice != 10){
+    while(choice != toEXIT){
 
         switch(choice){
             case 1:
-                cout<<"Enter Value : ";
-                cin>>val;
+                cout<<"Enter Values : ";
+                cin >> val;
                 l1.insertAtStart(val);
+                while (cin.get() != '\n') {
+                    cin >> val;
+                    l1.insertAtStart(val);
+                }
                 break;
             case 2:
-                cout<<"Enter Value : ";
-                cin>>val;
+                cout<<"Enter Values : ";
+                cin >> val;
                 l1.insertAtEnd(val);
+                while (cin.get() != '\n') {
+                    cin >> val;
+                    l1.insertAtEnd(val);
+                }
                 break;
             case 3:
                 cout<<"Enter Value : ";
@@ -83,13 +99,33 @@ void driverProgram(){
                 l2.displayList();
                 break;
             case 10:
-
+                l1.splitLists(l2, l3);
+                cout<<"now List1 is empty"<<endl;
+                cout<<"now List2 contain : ";
+                l2.displayList();
+                cout<<"now List3 contain : ";
+                l3.displayList();
+                break;
+            case 11:
+                l1.removeDuplicateNodes();
+                l1.displayList();
+                break;
+            case 12:
+                l1.unionLists(l2, l3);
+                l1.displayList();
+                break;
+            case 13:
+                l1.deleteAlternateNodes();
+                l1.displayList();
+                break;
+            case toEXIT:
                 break;
             default:
                 cout<<"PLEASE SELECT VALID OPTION"<<endl;
         }
         
-        menuDisplay();
+        // menuDisplay();
+        cout<<"Enter choice : ";
         cin>>choice;
 
     }

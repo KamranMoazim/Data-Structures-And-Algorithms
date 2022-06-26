@@ -25,6 +25,40 @@ public:
 
 
 
+
+
+template <typename T>
+class LinkedListQueue;
+
+template <typename T>
+class Node {
+private:
+    T data;
+    Node* next;
+public:
+    friend LinkedListQueue<T>;
+};
+
+
+template <typename T>
+class LinkedListQueue {
+private:
+    Node<T>* front;
+    Node<T>* back;
+    bool isEmpty();
+public:
+    LinkedListQueue();
+    LinkedListQueue(const LinkedListQueue& );
+    LinkedListQueue operator= (const LinkedListQueue& );
+    ~LinkedListQueue();
+    bool enqueue(T);
+    bool dequeue(T&);
+    void print();
+};
+
+
+
+
 template <typename T>
 class Deque {
 private:

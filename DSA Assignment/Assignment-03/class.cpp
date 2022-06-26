@@ -1,6 +1,12 @@
+// Name          Kamran Moazim
+// Roll Number   BCS-F19-M-030
+// Section       BIT-F20-Afternoon
+
+
+
 #pragma once
 
-#include "any.h"
+#include "class.h"
 #include<iostream>
 
 using namespace std;
@@ -26,7 +32,10 @@ LinkedList::~LinkedList(){
 }
 
 
+// ********************************** TASKs 1.1
+
 bool LinkedList::insert(int val){
+    // here we are inserting value at the start of LIST
     Node* temp = new Node;
     temp->data = val;
     temp->next = head;
@@ -34,9 +43,9 @@ bool LinkedList::insert(int val){
     return true;
 } 
 
-
 void LinkedList::display(){
 
+    // we are counting number of nodes becuase we need to tell how many nodes are threr before showing content of LIST
     Node* curr = head;
     int count=0;
     while(curr != NULL){
@@ -53,7 +62,7 @@ void LinkedList::display(){
         curr = head;
 
         while(curr != NULL){
-            cout<<curr->data<<"\t";
+            cout<<curr->data<<" ";
             curr = curr->next;    
         }
         cout<<endl;
@@ -61,26 +70,28 @@ void LinkedList::display(){
 
 }
 
-
-
 bool LinkedList::remove(int val){
 
     Node* curr = head;
     Node* prev = NULL;
 
+    // looping till we found the value OR reached end;
     while(curr != NULL && curr->data != val){
         prev = curr;
         curr = curr->next;
     }
 
+    // whether there is no node or we have reached end
     if(curr == NULL){
         return false;
     }
 
+    // first node contain that particular value which we were looking for
     if(prev == NULL && curr->data == val){
         head = curr->next;
     }
 
+    // value was found somewhere in the middle of LIST
     if(prev != NULL){
         prev->next = curr->next;
     }
@@ -90,13 +101,13 @@ bool LinkedList::remove(int val){
     return true;
 }
 
-
 bool LinkedList::search(int key){
 
     Node* curr = head;
 
     while(curr != NULL){
         if(curr->data == key){
+            // as soon as we found that value, we will return
             return true;
         }
         curr = curr->next;
@@ -106,62 +117,33 @@ bool LinkedList::search(int key){
 }
 
 
+// ********************************** TASKs 1.2
 void LinkedList::sort(){
 
-    if(!head || !head->next) return;
+    if(!head || !head->next) return;    
 
     Node* outerCurr = head;
-    Node* innerCurr = head;
+    Node* innerCurr = NULL;
     Node* tempHead = NULL;
-    Node* anotherTempHead = NULL;
+    Node* startOfMins = NULL;
     Node* prevNode = NULL;
 
     Node* beforeMinNode = NULL;
-    Node* minNode = head;
+    Node* minNode = NULL;
     Node* afterMinNode = NULL;
     int min=0;
 
-    min = innerCurr->data;
 
-    while(innerCurr != NULL){
-
-        if(innerCurr->data < min){
-            beforeMinNode = prevNode;
-            min = innerCurr->data;
-            minNode = innerCurr;
-        }
-
-        prevNode = innerCurr;
-        innerCurr = innerCurr->next;
-
-    }
-
-    if(beforeMinNode != NULL){
-        beforeMinNode->next = minNode->next;
-    }
-
-    tempHead = minNode;
-
-    // cout<<"here 1 "<<tempHead->data<<endl;
-
-    if(head==tempHead){
-        // cout<<"iamere1"<<endl;
-        outerCurr = head->next;
-        // cout<<outerCurr->data<<endl;;
-    } else {
-        // cout<<"iamere2"<<endl;
-        outerCurr = head;
-    }
-
-
-    anotherTempHead = tempHead;
     while(outerCurr != NULL){
 
-        min = outerCurr->data;  // 7
-        minNode = outerCurr;
+        prevNode = NULL;
+
         beforeMinNode = NULL;
-        prevNode = outerCurr;
-        innerCurr = outerCurr->next; // 6
+        minNode = outerCurr;
+        innerCurr = outerCurr;
+        min = minNode->data;
+        afterMinNode = minNode->next;
+
 
         while(innerCurr != NULL){
 
@@ -169,48 +151,56 @@ void LinkedList::sort(){
                 beforeMinNode = prevNode;
                 min = innerCurr->data;
                 minNode = innerCurr;
+                afterMinNode = innerCurr->next;
             }
 
             prevNode = innerCurr;
             innerCurr = innerCurr->next;
         }
 
-        if(outerCurr->next == NULL){
-            minNode = outerCurr;
-        }
+        if(beforeMinNode == NULL){  // min node is found at start
 
-        if(beforeMinNode != NULL){
-            beforeMinNode->next = minNode->next;
-        } else {
             outerCurr = outerCurr->next;
+
+        } else if(beforeMinNode != NULL){  // min node is found in middle or at end
+
+            beforeMinNode->next = afterMinNode;
+
         }
 
-        minNode->next = NULL;
-        anotherTempHead->next = minNode;
-        anotherTempHead = anotherTempHead->next;
-        // cout<<"here 2 "<<minNode->data<<endl;
+        if(startOfMins == NULL){
+            startOfMins = minNode;
+            tempHead = startOfMins;
+        } else {
+            startOfMins->next = minNode;
+            startOfMins = startOfMins->next;
+        }
     }
-
+    
     head = tempHead;
+    cout<<"The list has been sorted!"<<endl;
 }
-
 
 
 void LinkedList::reverse(){
 
-    if(!head || !head->next) return;
+    if(!head || !head->next){
+        cout<<"The list has been reversed!"<<endl;
+        return;
+    }
 
-    Node* curr = head;
-    Node* nextNode = curr->next;
-    Node* curr2 = head;
+    Node* curr = NULL;
+    Node* curr2 = NULL;
     Node* curr3 = NULL;
     Node* temp = NULL;
 
+    // catching first node
+    temp = head;
     curr = head->next;
-    temp = curr;
-
     head->next = NULL;
+    curr3 = temp;
 
+    // reversing remaining nodes
     while(curr != NULL){
         curr2 = curr->next;
         curr->next = curr3;
@@ -218,9 +208,8 @@ void LinkedList::reverse(){
         curr = curr2;
     }
 
-    temp->next = head;
-
     head = curr3;
+    cout<<"The list has been reversed!"<<endl;
 }
 
 

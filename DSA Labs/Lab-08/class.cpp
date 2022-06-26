@@ -6,212 +6,390 @@
 using namespace std;
 
 
-
-
-
-
-
-
-
-// !!!
-// ???
-// ***
-//TODO 
+// **************************** TASK 0
 
 template <typename T>
-void SinglyLinkedList<T>::unionLists(SinglyLinkedList<T>& list1, SinglyLinkedList<T>& list2){
+SinglyLinkedList<T>::SinglyLinkedList(){
+    head = NULL;
+}
 
-    Node<T>* temp;
-    Node<T>* tempForNewNode;
-
+template <typename T>
+SinglyLinkedList<T>::~SinglyLinkedList(){
     Node<T>* curr;
     while(head != NULL){
         curr = head->next;
         delete head;
         head = curr;
     }
+}
 
-    if(list1.head==NULL && list2.head==NULL){
+template <typename T>
+bool SinglyLinkedList<T>::insertAtStart(T val){
+    Node<T>* temp = new Node<T>;
+    temp->data = val;
+    temp->next = head;
+    head = temp;
+    return true;
+}
+
+template <typename T>
+void SinglyLinkedList<T>::displayList(){
+
+    Node<T>* curr = head;
+
+    while(curr != NULL){
+        cout<<curr->data<<"\t";
+        curr = curr->next;    
+    }
+    cout<<endl;
+}
+
+template <typename T>
+int SinglyLinkedList<T>::countNodes(){
+    Node<T>* curr = head;
+    int count = 0;
+
+    while(curr != NULL){
+        count++;
+        curr = curr->next;    
+    }
+
+    return count;
+}
+
+
+
+// **************************** TASK 1
+template <typename T>
+bool SinglyLinkedList<T>::removeKthNode(int k, int& val){
+    
+    if(k <= countNodes()){
+
+        Node<T>* curr = head;
+        Node<T>* prev = NULL;
+
+        if(k==1){
+            val = curr->data;
+            head = curr->next;
+            delete curr;
+            curr = NULL;
+            return true;
+        }
+
+        int count = 1;
+        
+
+        while(count < k){
+            prev = curr;
+            curr = curr->next;
+            count++;
+        }
+
+        prev->next = curr->next;
+        val = curr->data;
+        delete curr;
+        curr = NULL;
+
+        return true;
+
+    } else {
+        return false;
+    }
+
+}
+
+
+
+
+// **************************** TASK 2
+template <typename T>
+void SinglyLinkedList<T>::combine(SinglyLinkedList& list1, SinglyLinkedList& list2){
+
+    if (list1.head == NULL && list2.head == NULL){
 
         head = NULL;
 
-    } else if(list1.head!=NULL && list2.head==NULL){
+    } else if (list1.head == NULL && list2.head != NULL){
 
-        curr = list1.head;
-        head = new Node<T>;
-        head->data = curr->data;
-        head->next = NULL;
-        curr = curr->next;
-        temp = head;
+        head = list1.head;
 
-        while(curr != NULL){
-            tempForNewNode = new Node<T>;
-            tempForNewNode->data = curr->data;
-            tempForNewNode->next = NULL;
-            temp->next = tempForNewNode;
-            temp = temp->next;
-            curr = curr->next;
-        }
-        temp->next = NULL;
+    } else if (list1.head != NULL && list2.head == NULL){
 
-    } else if(list1.head==NULL && list2.head!=NULL){
-
-        curr = list2.head;
-        head = new Node<T>;
-        head->data = curr->data;
-        head->next = NULL;
-        curr = curr->next;
-        temp = head;
-
-        while(curr != NULL){
-            tempForNewNode = new Node<T>;
-            tempForNewNode->data = curr->data;
-            tempForNewNode->next = NULL;
-            temp->next = tempForNewNode;
-            temp = temp->next;
-            curr = curr->next;
-        }
-        temp->next = NULL;
+        head = list2.head;
 
     } else {
 
-        curr = list1.head;
-        head = new Node<T>;
-        head->data = curr->data;
-        head->next = NULL;
-        curr = curr->next;
-        temp = head;
-
-        while(curr != NULL){
-            tempForNewNode = new Node<T>;
-            tempForNewNode->data = curr->data;
-            tempForNewNode->next = NULL;
-            temp->next = tempForNewNode;
-            temp = temp->next;
-            curr = curr->next;
-        }
-        temp->next = NULL;
-
-        curr = head;
-        Node<T>* curr2 = list2.head;
-        bool found = false;
-
-        while(curr2 != NULL){
-
-            while(curr != NULL){
-
-                if(curr->data == curr2->data){
-                    found = true;
-                    break;
-                }
-
-                curr = curr->next;
-            }
-
-            if(!found){
-                tempForNewNode = new Node<T>;
-                tempForNewNode->data = curr2->data;
-                tempForNewNode->next = NULL;
-                temp->next = tempForNewNode;
-                temp = temp->next;
-            }
-
-            curr2 = curr2->next;
-            curr = head;
-            found = false;
-        }
-
-    }
-}
-
-template <typename T>
-void SinglyLinkedList<T>::deleteAlternateNodes(){
-    if(head==NULL || head->next==NULL){
-        return;
-    } else {
+        head = list1.head;
         Node<T>* curr = head;
-        Node<T>* deletableNode = NULL;
-        Node<T>* prevNode = NULL;
 
-        while(curr != NULL && curr->next != NULL){
-            prevNode = curr;
-            deletableNode = curr->next;
-            curr = curr->next->next;
-            delete deletableNode;
-            prevNode->next = curr;
+        while(curr->next != NULL){
+            curr = curr->next;
         }
 
+        curr->next = list2.head;
+    }
+
+}
+
+
+
+
+
+// **************************** TASK 3
+template <typename T>
+void SinglyLinkedList<T>::shuffleMerge(SinglyLinkedList& list1, SinglyLinkedList& list2){
+
+    if (list1.head == NULL && list2.head == NULL){
+
+        head = NULL;
+
+    } else {
+
+        Node<T>* curr1 = list1.head;
+        Node<T>* curr2 = list2.head;
+        Node<T>* curr3 = NULL;
+
+        head = curr1;
+        curr1 = curr1->next;
+
+        head->next = curr2;
+        curr2 = curr2->next;
+
+        curr3 = head->next;
+
+        while(curr1 == NULL && curr2 == NULL){
+
+            curr3->next = curr1;
+            curr1 = curr1->next;
+            curr3 = curr3->next;
+
+            curr3->next = curr2;
+            curr2 = curr2->next;
+            curr3 = curr3->next;
+
+        }
     }
 }
 
+
+
+
+
+// **************************** TASK 4
 template <typename T>
-void SinglyLinkedList<T>::splitLists(SinglyLinkedList<T>& list1, SinglyLinkedList<T>& list2){
+bool SinglyLinkedList<T>::removeLastNode(int& val){
 
-    int nodes = countNodes();
-
-    if(nodes == 0){
-        list1.head = NULL;
-        list2.head = NULL;
-        return;
+    if(head == NULL){
+        return false;
     }
-    // 1 2 3 4 5 6
 
-    int count = 1;
-    list1.head = head;
+    if(head->next == NULL){
 
-    Node<T>* curr = head;;
-    while(count <= nodes/2){
+        Node<T>* curr = head;
+        head = head->next;
+        val = curr->data;
+        delete curr;
+        curr = NULL;
+
+        return true;
+    }
+
+    Node<T>* curr = head;
+    Node<T>* secondLastNode;
+
+    while(curr->next->next != NULL){
         curr = curr->next;
-        count++;
+    }
+    secondLastNode = curr;
+    curr = curr->next;
+
+    val = curr->data;
+    delete curr;
+    secondLastNode->next = NULL;
+    
+    return true;
+}
+
+
+template <typename T>
+bool SinglyLinkedList<T>::removeSecondLastNode(int& val){
+
+    if(head == NULL || head->next == NULL){
+        return false;
     }
 
-    list2.head = curr->next;
-    curr->next = NULL;
+    if(head->next->next == NULL){
 
-    head = NULL;
+        Node<T>* curr = head;
+        head = head->next;
+        val = curr->data;
+        delete curr;
+        curr = NULL;
+
+        return true;
+    }
+
+    Node<T>* curr = head;
+    Node<T>* beforeSecondLastNode;
+    Node<T>* temp;
+
+    while(curr->next->next->next != NULL){
+        curr = curr->next;
+    }
+    beforeSecondLastNode = curr;
+    curr = curr->next;
+    temp = curr->next;
+
+    val = curr->data;
+    delete curr;
+    curr = NULL;
+
+    beforeSecondLastNode->next = temp;
+    
+    return true;
+
+}
+
+
+
+
+
+
+// **************************** TASK 5
+template <typename T>
+T SinglyLinkedList<T>::findMin(){
+
+    // if(head == NULL){
+    //     return T
+    // }
+
+    T min = head->data;
+
+    Node<T>* curr = head;
+
+    while(curr != NULL){
+        if(curr->data < min){
+            min = curr->data;
+        }
+        curr = curr->next;    
+    }
+
+    return min;
+    // return -999;
+
+}
+
+template <typename T>
+T SinglyLinkedList<T>::findMax(){
+
+    // if(head == NULL){
+    //     return T
+    // }
+
+    T max = head->data;
+
+    Node<T>* curr = head;
+
+    while(curr != NULL){
+        if(curr->data > max){
+            max = curr->data;
+        }
+        curr = curr->next;    
+    }
+
+    return max;
+    // return 999;
+}
+
+
+
+
+
+
+// **************************** TASK 6
+template <typename T>
+T SinglyLinkedList<T>::findMinPrivate(Node<T>* curr, T minVal){
+
+    if(curr == NULL){
+        return minVal;
+    } else {
+        if (curr->data < minVal) {
+            return findMinPrivate(curr->next, curr->data);
+        } else {
+            return findMinPrivate(curr->next, minVal);
+        }
+    }
+
+}
+
+template <typename T>
+T SinglyLinkedList<T>::findMinRecursively(){
+
+    // if(head == NULL){
+    //     return T
+    // }
+
+    // if(head->next == NULL){
+    //     return head->data;
+    // }
+
+    return findMinPrivate(head->next, head->data);
+}
+
+
+
+
+
+
+
+
+// **************************** TASK 7
+template <typename T>
+int SinglyLinkedList<T>::countEvensPrivate(Node<T>* curr, T count){
+
+    if(curr == NULL){
+        return count;
+    } else {
+        count = curr->data%2 == 0 ? count+1 : count;
+        return countEvensPrivate(curr->next, count);
+    }
 
 }
 
 
 template <typename T>
-void SinglyLinkedList<T>::removeDuplicateNodes(){
-
-    if(!head || !head->next) return;
-
-    Node<T>* lookingFor = head;
-    Node<T>* prevOfIterator = head;
-    Node<T>* iterator = head->next;
-
-    while(lookingFor != NULL){
-
-        while(iterator != NULL){
-            if(iterator!=NULL && lookingFor->data == iterator->data){
-                prevOfIterator->next = iterator->next;
-                delete iterator;
-                iterator = prevOfIterator->next;
-                continue;
-            }
-
-            if(iterator != NULL){
-                prevOfIterator = iterator;
-                iterator = iterator->next;
-            }
-        }
-
-        lookingFor = lookingFor->next;
-        prevOfIterator = lookingFor;
-        if(lookingFor != NULL){
-            iterator = lookingFor->next;
-        }
-
+int SinglyLinkedList<T>::countEvens(){
+    
+    if(head == NULL){
+        return 0;
     }
+
+    if(head->next == NULL){
+        return head->data % 2 == 0 ? 1 : 0;
+    }
+
+    return countEvensPrivate(head, 0);
 }
 
 
-template <typename T>
-SinglyLinkedList<T>::SinglyLinkedList(){
-    head = NULL;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 template <typename T>
@@ -281,153 +459,11 @@ SinglyLinkedList<T> SinglyLinkedList<T>::operator = (const SinglyLinkedList<T>& 
 
 
 
-template <typename T>
-void SinglyLinkedList<T>::displayList(){
-
-    Node<T>* curr = head;
-
-    while(curr != NULL){
-        cout<<curr->data<<"\t";
-        curr = curr->next;    
-    }
-    cout<<endl;
-}
 
 
 
 
-template <typename T>
-int SinglyLinkedList<T>::countNodes(){
-    Node<T>* curr = head;
-    int count = 0;
 
-    while(curr != NULL){
-        count++;
-        curr = curr->next;    
-    }
-
-    return count;
-}
-
-
-
-template <typename T>
-bool SinglyLinkedList<T>::removeKthNode(int k, T& val){
-    
-    if(k <= countNodes()){
-
-        Node<T>* curr = head;
-        Node<T>* prev = NULL;
-
-        if(k==1){
-            val = curr->data;
-            head = curr->next;
-            delete curr;
-            curr = NULL;
-            return true;
-        }
-
-        int count = 1;
-        
-
-        while(count < k){
-            prev = curr;
-            curr = curr->next;
-            count++;
-        }
-
-        prev->next = curr->next;
-        val = curr->data;
-        delete curr;
-        curr = NULL;
-
-        return true;
-
-    } else {
-        return false;
-    }
-
-}
-
-
-
-template <typename T>
-void SinglyLinkedList<T>::combine(SinglyLinkedList& list1, SinglyLinkedList& list2){
-
-    if (list1.head == NULL && list2.head == NULL){
-
-        head = NULL;
-
-    } else if (list1.head == NULL && list2.head != NULL){
-
-        head = list1.head;
-
-    } else if (list1.head != NULL && list2.head == NULL){
-
-        head = list2.head;
-
-    } else {
-
-        head = list1.head;
-        Node<T>* curr = head;
-
-        while(curr->next != NULL){
-            curr = curr->next;
-        }
-
-        curr->next = list2.head;
-    }
-
-}
-
-
-
-template <typename T>
-void SinglyLinkedList<T>::shuffleMerge(SinglyLinkedList& list1, SinglyLinkedList& list2){
-
-    if (list1.head == NULL && list2.head == NULL){
-
-        head = NULL;
-
-    } else {
-
-        Node<T>* curr1 = list1.head;
-        Node<T>* curr2 = list2.head;
-        Node<T>* curr3 = NULL;
-
-        head = curr1;
-        curr1 = curr1->next;
-
-        head->next = curr2;
-        curr2 = curr2->next;
-
-        curr3 = head->next;
-
-        while(curr1 == NULL && curr2 == NULL){
-
-            curr3->next = curr1;
-            curr1 = curr1->next;
-            curr3 = curr3->next;
-
-            curr3->next = curr2;
-            curr2 = curr2->next;
-            curr3 = curr3->next;
-
-        }
-    }
-}
-
-
-
-
-template <typename T>
-bool SinglyLinkedList<T>::insertAtStart(T val){
-    Node<T>* temp = new Node<T>;
-    temp->data = val;
-    temp->next = head;
-    head = temp;
-    return true;
-}
 
 
 
@@ -717,7 +753,7 @@ bool SinglyLinkedList<T>::removeFromEnd(T& val){
 }
 
 
-
+// HomeWork 1
 template <typename T>
 void SinglyLinkedList<T>::displayReverseListUsingLoop(){
 
@@ -745,7 +781,7 @@ void SinglyLinkedList<T>::displayReverseListUsingLoop(){
 }
 
 
-
+// HomeWork 2
 template <typename T>
 bool SinglyLinkedList<T>::search(T key){
 
@@ -762,7 +798,7 @@ bool SinglyLinkedList<T>::search(T key){
 }
 
 
-
+// HomeWork 3
 template <typename T>
 T SinglyLinkedList<T>::findMax(){
 
@@ -785,13 +821,4 @@ T SinglyLinkedList<T>::findMax(){
 }
 
 
-
-template <typename T>
-SinglyLinkedList<T>::~SinglyLinkedList(){
-    Node<T>* curr;
-    while(head != NULL){
-        curr = head->next;
-        delete head;
-        head = curr;
-    }
-}
+// HomeWork 5 

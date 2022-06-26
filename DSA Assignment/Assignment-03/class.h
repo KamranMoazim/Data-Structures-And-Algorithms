@@ -1,3 +1,9 @@
+// Name          Kamran Moazim
+// Roll Number   BCS-F19-M-030
+// Section       BIT-F20-Afternoon
+
+
+
 #pragma once
 
 #include<iostream>
@@ -24,6 +30,7 @@ public:
     LinkedList();
     ~LinkedList();
 
+    // ********************************** TASKs 1.1
     bool insert(int ); 
     // This function will insert a new value (val) into the linked list, and return true.
 
@@ -40,10 +47,13 @@ public:
     // This function searches for val in the linked list. It will return true if val is present in the
     // linked list and it will return false otherwise.
 
+    // ********************************** TASKs 2.1
     void sort();
 
     void reverse();
 
+
+    // this function is made as it is required in TASK 1.3 to remove complete List
     void emptyList();
 };
 
