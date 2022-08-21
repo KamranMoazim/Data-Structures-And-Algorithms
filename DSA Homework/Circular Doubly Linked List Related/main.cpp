@@ -19,20 +19,16 @@ void menuDisplay(){
     cout<<"7. to DISPLAY"<<endl;
     cout<<"8. Testing of Copy Constructor"<<endl;
     cout<<"9. Testing of Assignment Operator"<<endl;
-    cout<<"10. to split List in 2 lists"<<endl;
-    cout<<"11. to remove duplicate NODES"<<endl;
-    cout<<"12. to Union two lists (first call 10 to split and then call it)"<<endl;
-    cout<<"13. to delete ALTERNATE NODES"<<endl;
-    cout<<"14. to EXIT"<<endl;
+    cout<<"10. to EXIT"<<endl;
 }
 
-const int toEXIT = 14;
+const int toEXIT = 10;
 
 void driverProgram(){
 
-    SinglyLinkedList<int> l1;
-    SinglyLinkedList<int> l2;
-    SinglyLinkedList<int> l3;
+    CDLLD<int> l1;
+    CDLLD<int> l2;
+    CDLLD<int> l3;
 
     int val=0, choice=1;
 
@@ -68,7 +64,7 @@ void driverProgram(){
             case 4:
                 cout<<"Enter Value : ";
                 cin>>val;
-                l1.uniqueSortedInsert(val);
+                // l1.uniqueSortedInsert(val);
                 break;
             case 5:
                 cout<<"Enter Value (which you wants to remove) : ";
@@ -78,46 +74,25 @@ void driverProgram(){
             case 6:
                 cout<<"Enter Value (which you wants to remove) : ";
                 cin>>val;
-                // l1.unsortedRemove(val);
-                l1.removeAllOccurences(val);
+                l1.unsortedRemove(val);
                 break;
             case 7:
-                l1.displayList();
+                l1.display();
                 break;
             case 8:
                 cout<<"Testing of Copy Constructor : ";
                 {
-                    SinglyLinkedList<int> l3 = l1;
-                    l3.displayList();
+                    CDLLD<int> l3 = l1;
+                    l3.display();
                 }
                 break;
             case 9:
                 cout<<"Testing of Assingment Operator : "<<endl;
                 cout<<"Before "<<endl;
-                l2.displayList();
+                l2.display();
                 l2 = l1;
                 cout<<"After "<<endl;
-                l2.displayList();
-                break;
-            case 10:
-                l1.splitLists(l2, l3);
-                cout<<"now List1 is empty"<<endl;
-                cout<<"now List2 contain : ";
-                l2.displayList();
-                cout<<"now List3 contain : ";
-                l3.displayList();
-                break;
-            case 11:
-                l1.removeDuplicateNodes();
-                l1.displayList();
-                break;
-            case 12:
-                l1.unionLists(l2, l3);
-                l1.displayList();
-                break;
-            case 13:
-                l1.deleteAlternateNodes();
-                l1.displayList();
+                l2.display();
                 break;
             case toEXIT:
                 break;

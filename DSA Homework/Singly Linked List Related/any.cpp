@@ -207,6 +207,23 @@ void SinglyLinkedList<T>::removeDuplicateNodes(){
     }
 }
 
+template <typename T>
+void SinglyLinkedList<T>::removeAllOccurences(T val){
+    Node<T>* temp = head;
+
+    while(temp != NULL){
+
+        if(temp->data == val){
+            Node<T>* temp2 = temp->next;
+            unsortedRemove(val);
+            temp = temp2;
+            continue;
+        }
+
+        temp = temp->next;
+    }
+}
+
 
 template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList(){

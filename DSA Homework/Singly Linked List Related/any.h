@@ -47,5 +47,6 @@ public:
     void deleteAlternateNodes();
     void splitLists(SinglyLinkedList& , SinglyLinkedList& );
     void removeDuplicateNodes();
+    void removeAllOccurences(T );
 };
 
