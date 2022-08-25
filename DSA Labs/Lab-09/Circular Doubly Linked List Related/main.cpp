@@ -285,8 +285,9 @@ void driver5(){
 
     while(c > 0){
 
-        l1.removeLastNode(val);
-        cout<<"removed : "<<val<<endl;
+        if(l1.removeLastNode(val)){
+            cout<<"removed : "<<val<<endl;
+        }
         c--;
     }
 
@@ -354,7 +355,10 @@ void driver7(){
 
     while(c > 0){
 
-        if(l1.removeKthNode(2, val)){
+        cout<<"which node you wants to remove : ";
+        cin>>val;
+
+        if(l1.removeKthNode(val, val)){
             cout<<"removed : "<<val<<endl;
         }
         c--;

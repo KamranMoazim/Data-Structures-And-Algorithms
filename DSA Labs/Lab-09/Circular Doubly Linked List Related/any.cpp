@@ -24,10 +24,10 @@ using namespace std;
 bool CDLLD::removeKthNode(int k, int& val) {
 
 
-    if(k <= countNodes()){
+    if(k > 0 && k <= countNodes()){
 
         DNode* curr = head.next;
-        int count = 0;
+        int count = 1;
         
         while(count < k){
             curr = curr->next;
@@ -37,6 +37,7 @@ bool CDLLD::removeKthNode(int k, int& val) {
         curr->next->prev = curr->prev;
         curr->prev->next = curr->next;
 
+        val = curr->data;
 
         delete curr;
 
