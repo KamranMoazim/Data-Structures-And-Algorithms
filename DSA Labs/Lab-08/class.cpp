@@ -360,13 +360,13 @@ int SinglyLinkedList<T>::countEvensPrivate(Node<T>* curr, T count){
 template <typename T>
 int SinglyLinkedList<T>::countEvens(){
     
-    if(head == NULL){
-        return 0;
-    }
+    // if(head == NULL){
+    //     return 0;
+    // }
 
-    if(head->next == NULL){
-        return head->data % 2 == 0 ? 1 : 0;
-    }
+    // if(head->next == NULL){
+    //     return head->data % 2 == 0 ? 1 : 0;
+    // }
 
     return countEvensPrivate(head, 0);
 }
