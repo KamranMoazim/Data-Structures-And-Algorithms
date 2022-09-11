@@ -140,7 +140,6 @@ bool CDLLD::merge(CDLLD& list1, CDLLD& list2){
 
             if(curr1->data <= curr2->data){
 
-                // cout<<" ----- curr1->data : "<<curr1->data<<endl;
 
                 if(curr1->next != &list1.head && curr2->data <= curr1->next->data){
 
@@ -148,13 +147,10 @@ bool CDLLD::merge(CDLLD& list1, CDLLD& list2){
 
                     curr1->next = curr2;
                     curr2->prev = curr1;
-                    // cout<<" curr1->next "<<curr1->data<<endl;
 
                     curr1 = curr3;
-                    // cout<<" curr1->next "<<curr1->data<<endl;
 
                 } else {
-                    // cout<<" curr1 = curr1->next "<<curr1->data<<endl;
                     if(curr1->next == &list1.head){
                         curr1->next = curr2;
                         curr2->prev = curr1;
@@ -167,7 +163,6 @@ bool CDLLD::merge(CDLLD& list1, CDLLD& list2){
 
             } else {
 
-                // cout<<" ----- curr2->data : "<<curr2->data<<endl;
 
                 if(curr2->next != &list2.head && curr1->data <= curr2->next->data){
 
@@ -175,13 +170,10 @@ bool CDLLD::merge(CDLLD& list1, CDLLD& list2){
 
                     curr2->next = curr1;
                     curr1->prev = curr2;
-                    // cout<<" curr2->next "<<curr2->data<<endl;
 
                     curr2 = curr4;
-                    // cout<<" curr2->next "<<curr2->data<<endl;
 
                 } else {
-                    // cout<<" curr2 = curr2->next "<<curr2->data<<endl;
                     if(curr2->next == &list2.head){
                         curr2->next = curr1;
                         curr1->prev = curr2;
@@ -195,8 +187,6 @@ bool CDLLD::merge(CDLLD& list1, CDLLD& list2){
 
         }
 
-        // cout<<" curr1 "<<curr1->data<<endl;
-        // cout<<" curr2 "<<curr2->data<<endl;
 
         if(curr1 == &list1.head){
             curr1 = curr1->prev;
@@ -204,17 +194,13 @@ bool CDLLD::merge(CDLLD& list1, CDLLD& list2){
             list2.head.next->prev = curr1;
         }
 
-        // cout<<" curr1 "<<curr1->data<<endl;
-        // cout<<" curr2 "<<curr2->data<<endl;
-
+        
+        
         if(curr2 == &list2.head){
             curr2 = curr2->prev;
             curr2->next = list1.head.next;
             list1.head.next->prev = curr2;
         }
-
-        // cout<<" curr1 "<<curr1->data<<endl;
-        // cout<<" curr2 "<<curr2->data<<endl;
 
         
         if(list1.head.next->data <= list2.head.next->data){
@@ -282,11 +268,8 @@ void CDLLD::reverse(){
 
     while(curr1 != &head){
         curr2 = curr1->next;
-        // cout<<"curr1 : "<<curr1->data<<endl;
-        // cout<<"curr2 : "<<curr2->data<<endl;
         curr1->next = curr1->prev;
         curr1->prev = curr2;
-        // cout<<"-------------"<<endl;
         curr1 = curr2;
     }
     curr2 = curr1->next;
@@ -308,10 +291,7 @@ void CDLLD::insertionSort(){
 
     while(curr2 != &head){
 
-        // cout<<"curr1 : "<<curr1->data<<"\t";
-
         curr3 = curr1;
-        // sorted insert
 
         while( (curr1 != curr2) && curr1->data < curr2->data){
             curr1 = curr1->next;
@@ -322,12 +302,6 @@ void CDLLD::insertionSort(){
 
             curr3 = curr2->next;
             curr4 = curr1->prev;
-
-            // cout<<"at start"<<endl;
-            // cout<<"curr1 : "<<curr1->data<<"\n";
-            // cout<<"curr2 : "<<curr2->data<<"\n";
-            // cout<<"curr3 : "<<curr3->data<<"\n";
-            // cout<<"curr4 : "<<curr4->data<<"\n";
 
 
             if(curr3 == curr4 || curr3 == curr2){
@@ -368,33 +342,21 @@ void CDLLD::insertionSort(){
             
 
             curr2 = curr3;
-            // cout<<"curr2 : "<<curr2->data<<"\n";
 
             (*this).display();
 
         } else if(curr1 == curr2){
 
             curr2 = curr2->next;
-            // do nothing
-            // cout<<"at end"<<endl;
-            // cout<<"curr1 : "<<curr1->data<<"\n";
-            // cout<<"curr2 : "<<curr2->data<<"\n";
             
             (*this).display();
 
         } else {
-            // if(curr1->data >= curr2->data)
 
 
             curr3 = curr1;
             curr1 = curr1->prev;
             curr4 = curr2->next;
-
-            // cout<<"at middle somewhere"<<endl;
-            // cout<<"curr1 : "<<curr1->data<<"\n";
-            // cout<<"curr2 : "<<curr2->data<<"\n";
-            // cout<<"curr3 : "<<curr3->data<<"\n";
-            // cout<<"curr4 : "<<curr4->data<<"\n";
 
             curr1->next = curr2;
             curr2->next = curr3;
