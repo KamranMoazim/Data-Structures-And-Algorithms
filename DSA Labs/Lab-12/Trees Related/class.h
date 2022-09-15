@@ -33,6 +33,26 @@ private:
     TreeNode<T>* root;
     void removeNode(TreeNode<T>* );
     TreeNode<T>* copyNode(TreeNode<T>* );
+
+    TreeNode<T>* doubleCopyNode(TreeNode<T>* node){
+        if(node != NULL){
+
+            node->left = doubleCopyNode(node->left);
+            node->right = doubleCopyNode(node->right);
+
+            TreeNode<T>* temp = new TreeNode<T>();
+            temp->data = node->data;
+            temp->right = NULL;
+            temp->left = node->left;
+            node->left = temp;
+
+            return node;
+
+        } else {
+            return NULL;
+        }
+
+    }
     bool Equal(TreeNode<T>* , TreeNode<T>* );
     void visitNode(TreeNode<T>* );
     void preOrderPrivate(TreeNode<T>* );
@@ -45,48 +65,21 @@ private:
     int getHeight (TreeNode<T>* );
     TreeNode<T>* createBalancedTreeHelper (int* , int , int );
     void displayInRangeHelper(TreeNode<T>* , T, T);
-    void printAllPathsHelper(TreeNode<T>* node){
-
-        // base case
-        if (node == NULL) {
-            return;
-        }
-    
-        // create an empty stack to store a pair of tree nodes and
-        // its path from the root node
-        stack<pair<TreeNode<T>*, string>> stack;
-    
-        // push the root node
-        stack.push(make_pair(node, ""));
-    
-        // loop till stack is empty
-        while (!stack.empty())
-        {
-            // pop a node from the stack and push the data into the output stack
-            pair<TreeNode<T>*, string> p = stack.top();
-            stack.pop();
-    
-            // fetch current node
-            TreeNode<T>* curr = p.first;
-            string path = p.second;
-    
-            // add the current node to the existing path
-            string delim = (path == "") ? "\n" : " —> ";
-            path += (delim + to_string(curr->data));
-    
-            // print the path if the node is a leaf
-            if (curr->left == NULL && curr->right == NULL) {
-                cout << path;
+    void printAllPathsByArrayHelper(TreeNode<T>* node, T* array, int currIndex){
+        if(node->left == NULL && node->right == NULL){
+            for(int i=0; i<currIndex; i++){
+                cout<<array[i]<<" —> ";
             }
-    
-            // push the left and right child of the popped node into the stack
-            if (curr->right) {
-                stack.push(make_pair(curr->right, path));
+            cout<<node->data<<endl;
+        } else {
+            array[currIndex++] = node->data;
+            if(node->left != NULL){
+                printAllPathsByArrayHelper(node->left, array, currIndex);
+            } 
+            if(node->right != NULL) {
+                printAllPathsByArrayHelper(node->right, array, currIndex);
             }
-    
-            if (curr->left) {
-                stack.push(make_pair(curr->left, path));
-            }
+            currIndex--;
         }
     }
 public:
@@ -107,8 +100,12 @@ public:
     int countNodes();
     int getHeight();
     void createBalancedTree (int* , int , int );
-    void printAllPaths(){
-        printAllPathsHelper(root);
+    void printAllPathsByArray(){
+        T* arr = new T[100];
+        printAllPathsByArrayHelper(root, arr, 0);
+    }
+    void doubleTree(){
+        root = doubleCopyNode(root);
     }
     void displayInRange (T , T );
 };

@@ -275,23 +275,23 @@ void driver1(){
         cout<<val+3<<" not found using recursiveSearch"<<endl;
     }
 
-    cout<<"Enter value you wants to remove : ";
-    cin>>val;
-    if(b1.removeNode(val)){
-        cout<<val<<" removed"<<endl;
-    } else {
-        cout<<val<<" not removed"<<endl;
-    }
+    // cout<<"Enter value you wants to remove : ";
+    // cin>>val;
+    // if(b1.removeNode(val)){
+    //     cout<<val<<" removed"<<endl;
+    // } else {
+    //     cout<<val<<" not removed"<<endl;
+    // }
 
-    cout<<"again Tree (level-order) : ";
-    b1.levelOrderDisplay();
-    cout<<endl;
+    // cout<<"again Tree (level-order) : ";
+    // b1.levelOrderDisplay();
+    // cout<<endl;
 
 
-    BST<int> b2(b1);
-    cout<<"TESTING COPY CONSTRUCTOR - Tree (level-order) : ";
-    b2.levelOrderDisplay();
-    cout<<endl;
+    // BST<int> b2(b1);
+    // cout<<"TESTING COPY CONSTRUCTOR - Tree (level-order) : ";
+    // b2.levelOrderDisplay();
+    // cout<<endl;
 
     cout<<"Total nodes : "<<b1.countNodes()<<endl;
     cout<<"Height : "<<b1.getHeight()<<endl;
@@ -307,8 +307,14 @@ void driver1(){
     // b3.inOrderDisplay();
     // cout<<endl;
 
-    b1.printAllPaths();
-    cout<<endl;
+    cout<<"NOW ALL PATHS BY ARRAY"<<endl;
+    b1.printAllPathsByArray();
+
+    b1.doubleTree();
+    cout<<"Total nodes : "<<b1.countNodes()<<endl;
+    cout<<"Height : "<<b1.getHeight()<<endl;
+    cout<<"NOW ALL PATHS BY ARRAY"<<endl;
+    b1.printAllPathsByArray();
 
 }
 
