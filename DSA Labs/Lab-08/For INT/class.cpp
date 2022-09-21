@@ -39,7 +39,7 @@ void SinglyLinkedList::displayList(){
 
     while(curr != NULL){
         cout<<curr->data<<"\t";
-        curr = curr->next;    
+        curr = curr->next;
     }
     cout<<endl;
 }
@@ -109,12 +109,12 @@ void SinglyLinkedList::combine(SinglyLinkedList& list1, SinglyLinkedList& list2)
 
         head = NULL;
 
-    } else if (list1.head == NULL && list2.head != NULL){
+    } else if (list1.head != NULL && list2.head == NULL){
 
         head = list1.head;
         list1.head = NULL;
 
-    } else if (list1.head != NULL && list2.head == NULL){
+    } else if (list1.head == NULL && list2.head != NULL){
 
         head = list2.head;
         list2.head = NULL;
@@ -154,11 +154,9 @@ void SinglyLinkedList::shuffleMerge(SinglyLinkedList& list1, SinglyLinkedList& l
         Node* curr3 = NULL;
 
         head = curr1;
-        // cout<<"curr1 :"<<curr1->data<<endl;
         curr1 = curr1->next;
 
         head->next = curr2;
-        // cout<<"curr2 :"<<curr2->data<<endl;
         curr2 = curr2->next;
 
         curr3 = head->next;
@@ -166,12 +164,10 @@ void SinglyLinkedList::shuffleMerge(SinglyLinkedList& list1, SinglyLinkedList& l
         while(curr1 != NULL && curr2 != NULL){
 
             curr3->next = curr1;
-            // cout<<"curr1 :"<<curr1->data<<endl;
             curr1 = curr1->next;
             curr3 = curr3->next;
 
             curr3->next = curr2;
-            // cout<<"curr2 :"<<curr2->data<<endl;
             curr2 = curr2->next;
             curr3 = curr3->next;
 
@@ -338,10 +334,6 @@ int SinglyLinkedList::findMinRecursively(){
         return -999;
     }
 
-    if(head->next == NULL){
-        return head->data;
-    }
-
     return findMinPrivate(head->next, head->data);
 }
 
@@ -371,10 +363,6 @@ int SinglyLinkedList::countEvens(){
     
     if(head == NULL){
         return 0;
-    }
-
-    if(head->next == NULL){
-        return head->data % 2 == 0 ? 1 : 0;
     }
 
     return countEvensPrivate(head, 0);

@@ -89,7 +89,6 @@ public:
             currSize = currSize + 1;
             int i = currSize;
             while(i>1 && std1>st[i/2]){
-                // cout<<" i : "<<i<<" replacing arr[i] : "<<arr[i]<<" with arr[i/2] : "<<arr[i/2]<<" val : "<<val<<endl;
                 st[i] = st[i/2];
                 i = i/2;
             }
@@ -109,9 +108,6 @@ public:
             if(st[right].rollNo > st[i].rollNo ) {
                 largest = right;
             }
-
-
-            // cout<<largest<<"\t"<<i<<endl;
 
             Student s = st[largest];
             st[largest] = st[i];
@@ -138,7 +134,6 @@ public:
             int right;
             int largest;
 
-            // cout<<"currentSize : "<<currentSize<<endl;
 
             while(flag==true && 2*i<=currSize){
 
@@ -146,22 +141,18 @@ public:
                 left = 2*i;
                 right = 2*i + 1;
 
-                // cout<<"largest : "<<largest<<" left : "<<left<<" right : "<<right<<endl;
 
                 if(left <= currSize && st[left] > st[largest]){
-                    // cout<<"arr[left] : "<<arr[left]<<" arr[largest] : "<<arr[largest]<<endl;
                     largest = left;
                 }
 
                 if(right <= currSize && st[right] > st[largest]){
-                    // cout<<"arr[right] : "<<arr[right]<<" arr[largest] : "<<arr[largest]<<endl;
                     largest = right;
                 }
 
                 if(largest == i){
                     flag = false;
                 } else {
-                    // swap(arr[i], arr[largest]);
                     Student t = st[i];
                     st[i] = st[largest];
                     st[largest] = t;

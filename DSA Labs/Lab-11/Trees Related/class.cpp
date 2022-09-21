@@ -215,8 +215,7 @@ int BST<T>::countNodes(TreeNode<T>* node){
 
 template <typename T>
 int BST<T>::countNodes(){
-    int c = countNodes(root);
-    return c;
+    return countNodes(root);;
 }
 
 
@@ -273,7 +272,7 @@ TreeNode<T>* BST<T>::createBalancedTreeHelper(int* arr, int start, int end){
     if(start <= end){
         int mid = (end + start) / 2;
 
-        TreeNode<T>* temp = new TreeNode<T>;
+        TreeNode<T>* temp = new TreeNode<T>();
         temp->data = arr[mid];
         temp->left = createBalancedTreeHelper(arr, start, mid-1);
         temp->right = createBalancedTreeHelper(arr, mid+1, end);
@@ -442,7 +441,11 @@ bool BST<T>::Equal(TreeNode<T>* orgNode, TreeNode<T>* comingNode){
     if(orgNode == NULL && comingNode == NULL){
         return true;
     } else {
-        return orgNode->data == comingNode->data && Equal(orgNode->left, comingNode->left) && Equal(orgNode->right, comingNode->right);
+        if(orgNode != NULL && comingNode != NULL){
+            return orgNode->data == comingNode->data && Equal(orgNode->left, comingNode->left) && Equal(orgNode->right, comingNode->right);
+        } else {
+            return false;
+        }
     }
 }
 template <typename T>

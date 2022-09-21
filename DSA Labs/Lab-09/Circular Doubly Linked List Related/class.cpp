@@ -1,6 +1,6 @@
 #pragma once
 
-#include "any.h"
+#include "class.h"
 #include<iostream>
 
 using namespace std;
@@ -62,9 +62,6 @@ bool CDLLD::removeSecondLastNode(int& val){
 
         DNode* secondLastNode = head.prev->prev;
 
-        // cout<<"head.prev->prev->prev : "<<head.prev->prev->prev->data<<endl;
-        // cout<<"head.prev->prev->prev->next : "<<head.prev->prev->next->data<<endl;
-
         head.prev->prev = head.prev->prev->prev;
         head.prev->prev->next = head.prev;
 
@@ -92,13 +89,8 @@ bool CDLLD::removeLastNode(int& val){
 
         DNode* lastNode = head.prev;
 
-        // cout<<"head.prev->prev : "<<head.prev->prev->data<<endl;
-        // cout<<"head.prev->prev->next : "<<head.prev->prev->data<<endl;
-
         head.prev = head.prev->prev;
-        head.prev->next = &head;
-
-        // cout<<val<<endl;
+        head.prev->prev->next = &head;
 
         delete lastNode;
 
@@ -195,9 +187,6 @@ void CDLLD::shuffleMerge(CDLLD& list1, CDLLD& list2){
 
         curr2->next = curr3;
         curr3->prev = curr2;
-
-        // cout<<curr1->data<<endl;
-        // cout<<curr2->data<<endl;
 
         curr1 = curr3;
         curr2 = curr4;
@@ -405,10 +394,10 @@ bool CDLLD::insertAtStart(int val){
  
 bool CDLLD::sortedInsert(int val){
 
-    DNode * temp = new DNode ();
+    DNode* temp = new DNode();
     temp->data = val;
 
-    DNode * curr = head.next;
+    DNode* curr = head.next;
 
     while(curr != &head && curr->data < val){
         curr = curr->next;
@@ -437,9 +426,11 @@ bool CDLLD::sortedRemove(int val){
         return false;
     }
 
+    curr = curr->prev;
     if(curr->data == val){
         curr->next->prev = curr->prev;
         curr->prev->next = curr->next;
+        delete curr;
         return true;
     }
 
@@ -463,6 +454,7 @@ bool CDLLD::unsortedRemove(int val){
     if(curr->data == val){
         curr->next->prev = curr->prev;
         curr->prev->next = curr->next;
+        delete curr;
         return true;
     }
 
@@ -475,10 +467,8 @@ CDLLD::~CDLLD(){
     DNode * curr = head.next;
     while(curr != &head){
         curr = curr->next;
-        // cout<<"*** "<<curr->prev->data<<"\t";
         delete curr->prev;
     }
-    cout<<endl;
     head.next = &head;
     head.prev = &head;
 }

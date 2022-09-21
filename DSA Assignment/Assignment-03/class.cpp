@@ -159,13 +159,9 @@ void LinkedList::sort(){
         }
 
         if(beforeMinNode == NULL){  // min node is found at start
-
             outerCurr = outerCurr->next;
-
         } else if(beforeMinNode != NULL){  // min node is found in middle or at end
-
             beforeMinNode->next = afterMinNode;
-
         }
 
         if(startOfMins == NULL){
@@ -175,10 +171,12 @@ void LinkedList::sort(){
             startOfMins->next = minNode;
             startOfMins = startOfMins->next;
         }
+
     }
     
     head = tempHead;
     cout<<"The list has been sorted!"<<endl;
+
 }
 
 

@@ -21,7 +21,8 @@ int SinglyLinkedList::removeAll(int val){
 
             if(prev == NULL){
                 head = curr->next;
-                curr = head;
+                delete curr;
+                curr = head->next;
             } else {
                 prev->next = curr->next;
                 delete curr;

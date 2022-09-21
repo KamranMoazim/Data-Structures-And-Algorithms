@@ -6,7 +6,7 @@ using namespace std;
 
 
 
-int value(string name){
+int getHashValue(string name){
     int temp = 0;
     for (int i=0; i < name.length(); i++)
     {
@@ -47,7 +47,7 @@ public:
     }
     bool insert (string name){
         if(!isFull()){
-            int index = value(name) % size;
+            int index = getHashValue(name) % size;
             if(table[index] == "NO" || table[index] == "RO"){
                 table[index] = name;
                 curSize++;
@@ -75,7 +75,7 @@ public:
         if(isEmpty()){
             return false;
         } else {
-            int index = value(name) % size;
+            int index = getHashValue(name) % size;
             if(table[index] == name){
                 return true;
             } else {
@@ -99,7 +99,7 @@ public:
         if(isEmpty()){
             return false;
         } else {
-            int index = value(name) % size;
+            int index = getHashValue(name) % size;
             if(table[index] == name){
                 table[index] = "RO";  // RO stands for Removed
                 curSize--;

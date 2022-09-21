@@ -104,6 +104,7 @@ int findLargestIndex(int* arr, int start, int end) {
 
     if(start < end){
         int gettingIndex = findLargestIndex(arr, start+1, end);
+        
         if(arr[start] > arr[gettingIndex]){
             index = start;
         } else {

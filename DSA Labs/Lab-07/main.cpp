@@ -95,10 +95,7 @@ void pancakeSortRec(int* arr, int start, int end){
 bool checkSumFromRemaining(int* arr, int start, int end, int k, int l){
     
     if(start < end){
-        // cout<<(arr[start]+l)<<"\t";
         if((arr[start]+l) == k){
-            // cout<<endl;
-            // cout<<"returning true\n";
             return true;
         } else {
             return checkSumFromRemaining(arr, ++start, end, k, l);
@@ -112,22 +109,15 @@ bool checkSumFromRemaining(int* arr, int start, int end, int k, int l){
 // *********************************** TASK 4
 bool checkSum(int* arr, int start, int end, int k){
 
-    // cout<<endl<<start;
-
     if(start<end){
-
-        // cout<<endl;
 
         start++;
         bool condition = checkSumFromRemaining(arr, start, end, k, arr[start-1]);
         if(condition){
-            // cout<<"checkSum true"<<endl;
             return true;
         }
         return condition || checkSum(arr, start, end, k);
     }
-
-    // cout<<"getting here"<<endl;
 
     return false;
 }

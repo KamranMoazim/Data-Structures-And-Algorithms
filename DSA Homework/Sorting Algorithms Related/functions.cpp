@@ -139,28 +139,18 @@ int findPivot(T* arr, int start, int end){
     int i = start-1;
     for(int j=start; j<end; j++){
         if(arr[j] < pivot){
-        printArray(arr, end+1);
             i++;
             swapper(arr[j], arr[i]);
         }
     }
-    printArray(arr, end+1);
     swapper(arr[i+1], arr[end]);
     return i+1;
 }
 template<typename T>
 void quickSort(T* arr, int start, int end){
 
-    cout<<"after getting into quickSort : \t";
-    printArray(arr, end+1);
-
     if(start<end){
-        cout<<"before sending to pivot : \t";
-        printArray(arr, end+1);
         int pivot = findPivot(arr, start, end);
-        cout<<"pivot is : \t"<<arr[pivot]<<endl;
-        cout<<"after getting from pivot : \t";
-        printArray(arr, end+1);
         quickSort(arr, start, pivot-1);
         quickSort(arr, pivot+1, end);
     }

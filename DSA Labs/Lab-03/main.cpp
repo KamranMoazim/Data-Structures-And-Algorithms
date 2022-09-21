@@ -1,7 +1,7 @@
 #include<iostream>
 
 
-#include"any.cpp"
+#include"class.cpp"
 #include"functions.cpp"
 
 using namespace std;

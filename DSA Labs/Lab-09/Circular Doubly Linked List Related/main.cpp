@@ -2,7 +2,7 @@
 #include<cmath>
 #include <typeinfo>
 
-#include"any.cpp"
+#include"class.cpp"
 
 using namespace std;
 

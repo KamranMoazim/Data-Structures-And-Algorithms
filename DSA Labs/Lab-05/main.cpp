@@ -33,6 +33,7 @@ void addingLargeNumbers(char num1[], char num2[]){
             stackForNumber1.push(0);
             howManyZeros--;
         }
+        
     } else if(num1Length > num2Length){
 
         howManyZeros = num1Length - num2Length;
